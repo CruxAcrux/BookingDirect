@@ -7,6 +7,8 @@ declare module 'vue-router' {
     requiresAuth?: boolean
     guestOnly?: boolean
     requiresPlatformAdmin?: boolean
+    /** Only shop owners; barbers are sent to the dashboard. */
+    requiresOwner?: boolean
   }
 }
 
@@ -18,17 +20,21 @@ export function safeRedirect(value: unknown): string | null {
 }
 
 export async function authGuard(to: RouteLocationNormalized): Promise<RouteLocationRaw | true> {
-  const { requiresAuth, guestOnly, requiresPlatformAdmin } = to.meta
-  if (!requiresAuth && !guestOnly && !requiresPlatformAdmin) return true
+  const { requiresAuth, guestOnly, requiresPlatformAdmin, requiresOwner } = to.meta
+  if (!requiresAuth && !guestOnly && !requiresPlatformAdmin && !requiresOwner) return true
 
   const auth = useAuthStore()
   await auth.ensureLoaded()
 
-  if ((requiresAuth || requiresPlatformAdmin) && !auth.user) {
+  if ((requiresAuth || requiresPlatformAdmin || requiresOwner) && !auth.user) {
     return { name: 'login', query: { redirect: to.fullPath } }
   }
 
   if (requiresPlatformAdmin && !auth.user?.is_platform_admin) {
+    return { name: 'dashboard' }
+  }
+
+  if (requiresOwner && auth.currentShop?.role !== 'owner') {
     return { name: 'dashboard' }
   }
 

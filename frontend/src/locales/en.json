@@ -86,7 +86,13 @@
     "required": "This field is required.",
     "email": "Enter a valid email address.",
     "passwordLength": "The password must be at least 10 characters.",
-    "passwordMismatch": "The passwords don't match."
+    "passwordMismatch": "The passwords don't match.",
+    "integer": "Enter a whole number.",
+    "outOfRange": "The value is out of range.",
+    "price": "Enter a price in kronor, for example 349 or 349.50.",
+    "stepOfFive": "Use steps of 5 minutes.",
+    "slug": "Only lowercase letters a–z, numbers and hyphens.",
+    "endAfterStart": "The end must be after the start."
   },
   "errors": {
     "generic": "Something went wrong. Please try again.",
@@ -109,5 +115,222 @@
       "title": "Today's schedule",
       "body": "Today's bookings and the walk-in queue will show up here."
     }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "remove": "Remove",
+    "saved": "Saved.",
+    "loading": "Loading…",
+    "inactive": "Inactive",
+    "minutes": "{n} min",
+    "minShort": "min",
+    "daysShort": "days",
+    "hoursShort": "hrs",
+    "moveUp": "Move {name} up",
+    "moveDown": "Move {name} down"
+  },
+  "nav": {
+    "label": "Main menu",
+    "overview": "Overview",
+    "team": "Team",
+    "services": "Services",
+    "settings": "Shop",
+    "adminShops": "Shops"
+  },
+  "upload": {
+    "choose": "Choose image",
+    "replace": "Replace image",
+    "working": "Uploading…",
+    "wrongType": "Choose a JPEG, PNG or WebP image.",
+    "tooLarge": "The image can be at most {max} MB.",
+    "help": "JPEG, PNG or WebP, up to 10 MB. Images are resized automatically."
+  },
+  "schedule": {
+    "closed": "Closed",
+    "addRange": "Add time",
+    "from": "From, {day}",
+    "to": "To, {day}",
+    "invalidRange": "The end time must be after the start time.",
+    "overlap": "The times overlap."
+  },
+  "settings": {
+    "kicker": "Settings",
+    "title": "Your shop",
+    "tabsLabel": "Settings",
+    "tabs": {
+      "profile": "Profile",
+      "booking": "Booking rules",
+      "hours": "Opening hours",
+      "images": "Images"
+    },
+    "fields": {
+      "name": "Shop name",
+      "slug": "Booking page address",
+      "address": "Street address",
+      "phone": "Phone",
+      "email": "Email",
+      "locale": "Language for customers",
+      "timezone": "Time zone",
+      "slotInterval": "Start times every",
+      "minNotice": "Minimum notice",
+      "maxDaysAhead": "Book up to",
+      "cancellationWindow": "Cancel at least",
+      "walkIns": "Walk-in queue"
+    },
+    "slugHint": "Customers book at /s/{slug}. Old links stop working if you change it.",
+    "bookingRulesHelp": "Minimum notice is how late a customer can still book. Cancellation is in hours before the visit.",
+    "walkInsHelp": "Show a live queue for guests without a booking.",
+    "hoursHelp": "Set when the shop is open. A day can have several ranges, for example closed for lunch. Days without times are closed.",
+    "logo": "Logo",
+    "cover": "Cover image"
+  },
+  "services": {
+    "kicker": "Menu",
+    "title": "Services",
+    "add": "New service",
+    "addTitle": "New service",
+    "editTitle": "Edit service",
+    "emptyTitle": "No services yet",
+    "emptyBody": "Add what the shop offers, with duration and price.",
+    "fields": {
+      "name": "Name",
+      "description": "Description",
+      "duration": "Duration",
+      "buffer": "Buffer after",
+      "price": "Price",
+      "rebookAfter": "Rebooking reminder after",
+      "active": "Bookable"
+    },
+    "rebookHint": "Leave empty to send no reminders.",
+    "activeHint": "Inactive services are hidden from customers.",
+    "bufferShort": "{n} min buffer",
+    "rebookShort": "reminder after {n} days",
+    "deleteTitle": "Delete {name}?",
+    "deleteBody": "The service disappears from the menu. Past bookings are not affected.",
+    "deleted": "The service was deleted."
+  },
+  "team": {
+    "kicker": "The team",
+    "title": "Barbers",
+    "add": "Add barber",
+    "addTitle": "New barber",
+    "addHint": "You can invite the barber to sign in afterwards.",
+    "created": "{name} was added.",
+    "emptyTitle": "No barbers yet",
+    "emptyBody": "Add the people who cut hair in the shop.",
+    "noLogin": "No login",
+    "you": "You",
+    "back": "All barbers",
+    "notFound": "Barber not found.",
+    "tabsLabel": "Barber",
+    "tabs": {
+      "profile": "Profile",
+      "services": "Services",
+      "schedule": "Schedule",
+      "timeOff": "Time off",
+      "portfolio": "Portfolio"
+    },
+    "fields": {
+      "displayName": "Name customers see",
+      "bio": "Bio",
+      "active": "Active"
+    },
+    "activeHint": "Inactive barbers can't be booked.",
+    "photo": "Photo",
+    "login": "Login",
+    "noLoginHint": "This barber has no login. Invite them to see their schedule and manage their profile.",
+    "inviteEmail": "Email for the invitation",
+    "invite": "Send invitation",
+    "invited": "Invitation sent to {email}.",
+    "remove": "Remove",
+    "removeButton": "Remove barber",
+    "deleteTitle": "Remove {name}?",
+    "deleteBody": "The barber can no longer be booked or sign in. Past bookings are kept.",
+    "deleted": "{name} was removed.",
+    "services": {
+      "help": "Tick the services this barber offers. Leave price and duration empty to use the service default.",
+      "readonlyHelp": "The services this barber offers. The owner changes them.",
+      "service": "Service",
+      "default": "Default",
+      "price": "Own price (kr)",
+      "duration": "Own duration (min)",
+      "priceFor": "Own price for {name}",
+      "durationFor": "Own duration for {name}",
+      "invalid": "Check prices and durations. Durations use steps of 5 minutes."
+    },
+    "schedule": {
+      "workingHours": "Working hours",
+      "breaks": "Breaks",
+      "workingHoursHelp": "When the barber works in a normal week. Only time within opening hours can be booked.",
+      "breaksHelp": "Recurring breaks, such as lunch. They are blocked for booking.",
+      "outsideOpening": "Partly outside the shop's opening hours. That part can't be booked.",
+      "breakOutsideHours": "The break is outside working hours."
+    },
+    "timeOff": {
+      "upcoming": "Time off",
+      "empty": "No time off added.",
+      "add": "Add time off",
+      "added": "Time off added.",
+      "allDay": "Whole days",
+      "from": "From",
+      "to": "Until",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "reason": "Reason",
+      "note": "Note",
+      "deleteTitle": "Delete this time off?",
+      "reasons": {
+        "vacation": "Vacation",
+        "sick": "Sick",
+        "other": "Other"
+      }
+    },
+    "portfolio": {
+      "add": "Add images",
+      "help": "Up to 30 images. JPEG, PNG or WebP, up to 10 MB each.",
+      "empty": "No images yet.",
+      "imageAlt": "Portfolio image {n}",
+      "caption": "Caption for image {n}",
+      "captionPlaceholder": "Caption",
+      "deleteTitle": "Delete this image?"
+    }
+  },
+  "admin": {
+    "kicker": "Platform",
+    "title": "Shops",
+    "add": "New shop",
+    "addTitle": "New shop",
+    "search": "Search shops",
+    "empty": "No shops found.",
+    "columns": {
+      "shop": "Shop",
+      "owners": "Owners",
+      "created": "Created",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "active": "Active",
+    "inactive": "Deactivated",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "deactivateTitle": "Deactivate {name}?",
+    "deactivateBody": "The booking page and staff access stop working. Nothing is deleted.",
+    "created": "{name} was created.",
+    "fields": {
+      "name": "Shop name",
+      "slug": "Address (optional)",
+      "ownerName": "Owner name",
+      "ownerEmail": "Owner email"
+    },
+    "slugHint": "Leave empty to create one from the name.",
+    "inviteHint": "A new owner gets an email to choose a password.",
+    "pagination": "Pages",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {page} of {total}"
   }
 }

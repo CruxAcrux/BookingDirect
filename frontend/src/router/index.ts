@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import { useAuthStore } from '@/stores/auth'
+
 import { authGuard } from './guards'
 
 const router = createRouter({
@@ -53,6 +55,87 @@ const router = createRouter({
           path: '',
           name: 'dashboard',
           component: () => import('@/features/dashboard/views/DashboardHomeView.vue'),
+          // A platform admin without a shop has nothing to see on the overview.
+          beforeEnter: () => {
+            const auth = useAuthStore()
+            return auth.currentShop === null && auth.user?.is_platform_admin
+              ? { name: 'admin-shops' }
+              : true
+          },
+        },
+        {
+          path: 'team',
+          name: 'team',
+          component: () => import('@/features/team/views/TeamView.vue'),
+        },
+        {
+          path: 'team/:barberId(\\d+)',
+          component: () => import('@/features/team/views/BarberLayout.vue'),
+          children: [
+            {
+              path: '',
+              name: 'barber',
+              component: () => import('@/features/team/views/BarberProfileView.vue'),
+            },
+            {
+              path: 'services',
+              name: 'barber-services',
+              component: () => import('@/features/team/views/BarberServicesView.vue'),
+            },
+            {
+              path: 'schedule',
+              name: 'barber-schedule',
+              component: () => import('@/features/team/views/BarberScheduleView.vue'),
+            },
+            {
+              path: 'time-off',
+              name: 'barber-time-off',
+              component: () => import('@/features/team/views/BarberTimeOffView.vue'),
+            },
+            {
+              path: 'portfolio',
+              name: 'barber-portfolio',
+              component: () => import('@/features/team/views/BarberPortfolioView.vue'),
+            },
+          ],
+        },
+        {
+          path: 'services',
+          name: 'services',
+          component: () => import('@/features/services/views/ServicesView.vue'),
+        },
+        {
+          path: 'settings',
+          component: () => import('@/features/settings/views/SettingsLayout.vue'),
+          meta: { requiresOwner: true },
+          children: [
+            {
+              path: '',
+              name: 'settings',
+              component: () => import('@/features/settings/views/ShopProfileView.vue'),
+            },
+            {
+              path: 'booking',
+              name: 'settings-booking',
+              component: () => import('@/features/settings/views/BookingRulesView.vue'),
+            },
+            {
+              path: 'hours',
+              name: 'settings-hours',
+              component: () => import('@/features/settings/views/OpeningHoursView.vue'),
+            },
+            {
+              path: 'images',
+              name: 'settings-images',
+              component: () => import('@/features/settings/views/ShopImagesView.vue'),
+            },
+          ],
+        },
+        {
+          path: 'admin/shops',
+          name: 'admin-shops',
+          component: () => import('@/features/admin/views/AdminShopsView.vue'),
+          meta: { requiresPlatformAdmin: true },
         },
       ],
     },
