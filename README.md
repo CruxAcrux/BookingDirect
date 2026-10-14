@@ -31,18 +31,31 @@ A multi-tenant booking system for barbershops: every shop gets its own booking p
 ```bash
 cd BookingDirect
 docker compose up -d
-docker compose exec backend php artisan migrate
+docker compose exec backend php artisan migrate --seed
 ```
 
 The first start installs dependencies and creates `backend/.env` from `backend/.env.example`, so it takes a minute.
 
-| Service                     | URL                   |
-| --------------------------- | --------------------- |
-| App                         | http://localhost:5173 |
-| API                         | http://localhost:8000 |
-| Mailpit (development email) | http://localhost:8025 |
+| Service                     | URL                            |
+| --------------------------- | ------------------------------ |
+| App                         | http://localhost:5173          |
+| API                         | http://localhost:8000          |
+| API documentation (OpenAPI) | http://localhost:8000/docs/api |
+| Mailpit (development email) | http://localhost:8025          |
 
 If one of these ports is already taken, copy `.env.example` in the project root to `.env` and change it there.
+
+### Sign-in accounts
+
+The seeder creates these local accounts. The password is `password` for all of them.
+
+| Role           | Email                     |
+| -------------- | ------------------------- |
+| Platform admin | admin@bookingdirect.test  |
+| Shop owner     | owner@bookingdirect.test  |
+| Barber         | barber@bookingdirect.test |
+
+Staff sign in at http://localhost:5173/login.
 
 ## Running tests and checks
 
@@ -57,6 +70,8 @@ docker compose exec frontend npm test
 docker compose exec frontend npm run lint
 docker compose exec frontend npm run typecheck
 ```
+
+The frontend's API types are generated from the backend's OpenAPI spec. After changing an endpoint, regenerate them with `docker compose exec frontend npm run api:types`.
 
 Backend tests run against a separate `bookingdirect_test` database, so your local data stays untouched.
 

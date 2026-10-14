@@ -46,5 +46,68 @@
   },
   "footer": {
     "madeIn": "Göteborg"
+  },
+  "auth": {
+    "layout": {
+      "kicker": "Personalingång",
+      "title": "Bakom stolen."
+    },
+    "fields": {
+      "email": "E-post",
+      "password": "Lösenord",
+      "newPassword": "Nytt lösenord",
+      "confirmPassword": "Upprepa lösenordet"
+    },
+    "login": {
+      "title": "Logga in",
+      "lead": "För ägare och barberare.",
+      "remember": "Kom ihåg mig",
+      "forgot": "Glömt lösenordet?",
+      "submit": "Logga in",
+      "throttled": "För många försök. Vänta en minut och försök igen."
+    },
+    "forgot": {
+      "title": "Glömt lösenordet",
+      "lead": "Ange din e-post så skickar vi en länk där du väljer ett nytt lösenord.",
+      "submit": "Skicka länk",
+      "sent": "Om e-postadressen finns hos oss har vi skickat en länk. Kolla inkorgen."
+    },
+    "reset": {
+      "title": "Välj lösenord",
+      "lead": "Nytt lösenord för {email}.",
+      "hint": "Minst {min} tecken.",
+      "submit": "Spara lösenord",
+      "done": "Lösenordet är sparat. Logga in med ditt nya lösenord.",
+      "invalidLink": "Länken är ofullständig. Be om en ny länk."
+    },
+    "backToLogin": "Tillbaka till inloggningen"
+  },
+  "validation": {
+    "required": "Fyll i fältet.",
+    "email": "Ange en giltig e-postadress.",
+    "passwordLength": "Lösenordet måste vara minst 10 tecken.",
+    "passwordMismatch": "Lösenorden matchar inte."
+  },
+  "errors": {
+    "generic": "Något gick fel. Försök igen.",
+    "throttled": "För många försök. Vänta en stund och försök igen."
+  },
+  "dashboard": {
+    "signOut": "Logga ut",
+    "roles": {
+      "owner": "Ägare",
+      "barber": "Barberare"
+    },
+    "greeting": {
+      "morning": "God morgon, {name}",
+      "day": "Hej, {name}",
+      "evening": "God kväll, {name}"
+    },
+    "noShop": "Du är inte kopplad till någon aktiv salong. Kontakta salongens ägare.",
+    "adminNoShop": "Du är plattformsadministratör och inte kopplad till någon salong.",
+    "today": {
+      "title": "Dagens schema",
+      "body": "Här samlas dagens bokningar och drop-in-kön."
+    }
   }
 }

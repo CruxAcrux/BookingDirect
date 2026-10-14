@@ -30,6 +30,7 @@ const numberFormats = {
 const datetimeFormats = {
   time: { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' },
   date: { weekday: 'short', day: 'numeric', month: 'short' },
+  long: { weekday: 'long', day: 'numeric', month: 'long' },
 } as const
 
 export const i18n = createI18n<[MessageSchema], AppLocale, false>({
