@@ -26,6 +26,7 @@ class WeeklyHourResource extends JsonResource
             : [$model->starts_at, $model->ends_at];
 
         return [
+            /** @var int */
             'weekday' => $model->weekday->value,
             'starts_at' => substr($start, 0, 5),
             'ends_at' => substr($end, 0, 5),

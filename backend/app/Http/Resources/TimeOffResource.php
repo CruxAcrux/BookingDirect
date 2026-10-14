@@ -29,6 +29,7 @@ class TimeOffResource extends JsonResource
             /** Local time in the shop's timezone, e.g. "2026-11-03T09:00". */
             'starts_at_local' => $start->format('Y-m-d\TH:i'),
             'ends_at_local' => $end->format('Y-m-d\TH:i'),
+            /** @var bool */
             'all_day' => $start->format('H:i') === '00:00' && $end->format('H:i') === '00:00',
             'reason' => $this->reason,
             'note' => $this->note,

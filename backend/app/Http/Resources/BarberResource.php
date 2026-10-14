@@ -22,10 +22,15 @@ class BarberResource extends JsonResource
             'id' => $this->id,
             'display_name' => $this->display_name,
             'bio' => $this->bio,
+            /** @var string|null */
             'avatar_url' => app(ImageStore::class)->url($this->avatar_path),
             'is_active' => $this->is_active,
             'sort_order' => $this->sort_order,
-            /** Whether this profile belongs to the signed-in user. */
+            /**
+             * Whether this profile belongs to the signed-in user.
+             *
+             * @var bool
+             */
             'is_me' => $this->user_id !== null && $this->user_id === $request->user()?->id,
             'user' => $this->whenLoaded('user', fn () => $this->user === null ? null : [
                 'id' => $this->user->id,

@@ -21,7 +21,9 @@ class PortfolioImageResource extends JsonResource
 
         return [
             'id' => $this->id,
+            /** @var string */
             'url' => $images->url($this->path),
+            /** @var string */
             'thumbnail_url' => $images->url($this->thumbnail_path ?? $this->path),
             'caption' => $this->caption,
             'sort_order' => $this->sort_order,

@@ -17,6 +17,11 @@ class ShopController extends Controller
      */
     public function index(Request $request): AnonymousResourceCollection
     {
+        $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'page' => ['sometimes', 'integer', 'min:1'],
+        ]);
+
         $search = $request->string('search')->trim()->value();
 
         $shops = Shop::query()

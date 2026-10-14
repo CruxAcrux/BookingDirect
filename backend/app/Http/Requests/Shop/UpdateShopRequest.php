@@ -31,6 +31,7 @@ class UpdateShopRequest extends FormRequest
             'min_notice_minutes' => ['sometimes', 'required', 'integer', 'between:0,10080'],
             'max_days_ahead' => ['sometimes', 'required', 'integer', 'between:1,365'],
             'cancellation_window_hours' => ['sometimes', 'required', 'integer', 'between:0,168'],
+            /** @var 5|10|15|20|30|60 */
             'slot_interval_minutes' => ['sometimes', 'required', 'integer', Rule::in(self::SLOT_INTERVALS)],
             'walk_ins_enabled' => ['sometimes', 'required', 'boolean'],
         ];

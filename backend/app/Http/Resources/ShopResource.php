@@ -30,7 +30,9 @@ class ShopResource extends JsonResource
             'email' => $this->email,
             'timezone' => $this->timezone,
             'locale' => $this->locale,
+            /** @var string|null */
             'logo_url' => $images->url($this->logo_path),
+            /** @var string|null */
             'cover_url' => $images->url($this->cover_path),
             'min_notice_minutes' => $this->min_notice_minutes,
             'max_days_ahead' => $this->max_days_ahead,
