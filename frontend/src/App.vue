@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import SiteFooter from '@/components/layout/SiteFooter.vue'
-import SiteHeader from '@/components/layout/SiteHeader.vue'
-
 const { t } = useI18n()
 </script>
 
@@ -14,11 +11,5 @@ const { t } = useI18n()
   >
     {{ t('app.skipToContent') }}
   </a>
-  <div class="flex min-h-dvh flex-col">
-    <SiteHeader />
-    <main id="main" tabindex="-1" class="flex-1 focus:outline-none">
-      <RouterView />
-    </main>
-    <SiteFooter />
-  </div>
+  <RouterView />
 </template>

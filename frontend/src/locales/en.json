@@ -46,5 +46,68 @@
   },
   "footer": {
     "madeIn": "Gothenburg"
+  },
+  "auth": {
+    "layout": {
+      "kicker": "Staff entrance",
+      "title": "Behind the chair."
+    },
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New password",
+      "confirmPassword": "Repeat password"
+    },
+    "login": {
+      "title": "Sign in",
+      "lead": "For owners and barbers.",
+      "remember": "Remember me",
+      "forgot": "Forgot your password?",
+      "submit": "Sign in",
+      "throttled": "Too many attempts. Wait a minute and try again."
+    },
+    "forgot": {
+      "title": "Forgot password",
+      "lead": "Enter your email and we'll send you a link to choose a new password.",
+      "submit": "Send link",
+      "sent": "If we have an account for that email, a link is on its way. Check your inbox."
+    },
+    "reset": {
+      "title": "Choose a password",
+      "lead": "New password for {email}.",
+      "hint": "At least {min} characters.",
+      "submit": "Save password",
+      "done": "Your password is saved. Sign in with your new password.",
+      "invalidLink": "This link is incomplete. Request a new one."
+    },
+    "backToLogin": "Back to sign in"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Enter a valid email address.",
+    "passwordLength": "The password must be at least 10 characters.",
+    "passwordMismatch": "The passwords don't match."
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "throttled": "Too many attempts. Wait a moment and try again."
+  },
+  "dashboard": {
+    "signOut": "Sign out",
+    "roles": {
+      "owner": "Owner",
+      "barber": "Barber"
+    },
+    "greeting": {
+      "morning": "Good morning, {name}",
+      "day": "Hi, {name}",
+      "evening": "Good evening, {name}"
+    },
+    "noShop": "You're not connected to an active shop. Contact the shop owner.",
+    "adminNoShop": "You're a platform admin and not connected to any shop.",
+    "today": {
+      "title": "Today's schedule",
+      "body": "Today's bookings and the walk-in queue will show up here."
+    }
   }
 }
