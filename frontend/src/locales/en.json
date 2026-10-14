@@ -1,0 +1,50 @@
+{
+  "app": {
+    "name": "BookingDirect",
+    "skipToContent": "Skip to content"
+  },
+  "locale": {
+    "label": "Language",
+    "sv": "Svenska",
+    "en": "English"
+  },
+  "home": {
+    "kicker": "Booking system for barbershops",
+    "title": "The chair is yours. So is the calendar.",
+    "lead": "Your own booking page, a live walk-in queue and reminders that fill the gaps – with no commission per booking.",
+    "featuresTitle": "What's included",
+    "features": {
+      "page": {
+        "title": "Your own booking page",
+        "body": "Customers pick a service, a barber and a time from their phone. The link fits right in your Instagram bio."
+      },
+      "queue": {
+        "title": "Live walk-in queue",
+        "body": "Guests see their place and wait time. You reorder, assign and start with one tap."
+      },
+      "rebook": {
+        "title": "Reminders that rebook",
+        "body": "When the next cut is due, the customer gets a link to the same service with the same barber."
+      }
+    },
+    "ticket": {
+      "label": "Sample booking",
+      "number": "No",
+      "time": "Time",
+      "service": "Service",
+      "serviceValue": "Skin fade + beard",
+      "barber": "Barber",
+      "duration": "{minutes} min",
+      "status": "Confirmed"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "This chair is empty.",
+    "body": "The page you are looking for doesn't exist or has moved.",
+    "back": "Back to the start page"
+  },
+  "footer": {
+    "madeIn": "Gothenburg"
+  }
+}
