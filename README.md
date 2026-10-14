@@ -29,7 +29,6 @@ A multi-tenant booking system for barbershops: every shop gets its own booking p
 **Prerequisites:** Docker with Docker Compose.
 
 ```bash
-git clone https://github.com/CruxAcrux/BookingDirect.git
 cd BookingDirect
 docker compose up -d
 docker compose exec backend php artisan migrate
