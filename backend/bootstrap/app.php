@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Middleware\ResolveStaffShop;
+use App\Http\Middleware\SetLocaleFromRequest;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,6 +17,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->statefulApi();
+        $middleware->api(append: [SetLocaleFromRequest::class]);
+        $middleware->alias([
+            'shop' => ResolveStaffShop::class,
+        ]);
+        // The current shop must be known before route model binding runs, so bound
+        // models are already scoped to it and other shops' records resolve to 404.
+        $middleware->prependToPriorityList(SubstituteBindings::class, ResolveStaffShop::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
