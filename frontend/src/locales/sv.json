@@ -1,0 +1,50 @@
+{
+  "app": {
+    "name": "BookingDirect",
+    "skipToContent": "Hoppa till innehållet"
+  },
+  "locale": {
+    "label": "Språk",
+    "sv": "Svenska",
+    "en": "English"
+  },
+  "home": {
+    "kicker": "Bokningssystem för barberare",
+    "title": "Stolen är din. Kalendern också.",
+    "lead": "En egen bokningssida för salongen, en levande drop-in-kö och påminnelser som fyller luckorna – utan provision per bokning.",
+    "featuresTitle": "Det här ingår",
+    "features": {
+      "page": {
+        "title": "Egen bokningssida",
+        "body": "Kunden väljer tjänst, barberare och tid från mobilen. Länken passar i Instagram-bion."
+      },
+      "queue": {
+        "title": "Drop-in-kö i realtid",
+        "body": "Gästerna ser sin plats och väntetid. Du flyttar, tilldelar och startar med ett tryck."
+      },
+      "rebook": {
+        "title": "Påminnelser som återbokar",
+        "body": "När det är dags för nästa klippning får kunden en länk till samma tjänst hos samma barberare."
+      }
+    },
+    "ticket": {
+      "label": "Exempel på bokning",
+      "number": "Nr",
+      "time": "Tid",
+      "service": "Tjänst",
+      "serviceValue": "Skinfade + skägg",
+      "barber": "Barberare",
+      "duration": "{minutes} min",
+      "status": "Bekräftad"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Den här stolen är tom.",
+    "body": "Sidan du letar efter finns inte eller har flyttat.",
+    "back": "Till startsidan"
+  },
+  "footer": {
+    "madeIn": "Göteborg"
+  }
+}
