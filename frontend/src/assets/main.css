@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+@theme {
+  --color-paper: #f2ece1;
+  --color-paper-deep: #e6ddcc;
+  --color-ink: #17140f;
+  --color-ink-soft: #4a443b;
+  --color-line: #cbbfa9;
+  --color-pole: #a8321f;
+  --color-pole-deep: #7d2416;
+  --color-brass: #9a7a3c;
+
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --radius-sm: 2px;
+}
+
+@layer base {
+  html {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-variation-settings: 'wdth' 100;
+  }
+
+  ::selection {
+    @apply bg-pole text-paper;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-pole;
+  }
+}
+
+@utility font-condensed {
+  font-variation-settings: 'wdth' 62;
+}
+
+/* Red, paper and ink diagonals: the barber pole, used as the brand's rule line. */
+@utility pole-stripe {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-pole) 0 7px,
+    var(--color-paper) 7px 14px,
+    var(--color-ink) 14px 21px,
+    var(--color-paper) 21px 28px
+  );
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
