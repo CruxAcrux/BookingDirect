@@ -10,7 +10,7 @@ export default defineConfigWithVueTs(
     files: ['**/*.{vue,ts,mts,tsx}'],
   },
 
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', 'src/lib/api-types.ts']),
 
   ...pluginVue.configs['flat/recommended'],
   vueTsConfigs.strictTypeChecked,
@@ -24,6 +24,8 @@ export default defineConfigWithVueTs(
       'vue/no-unused-refs': 'error',
       'vue/no-useless-v-bind': 'error',
       'vue/require-typed-ref': 'error',
+      // Optional props are typed with `?` in TypeScript; an explicit default adds nothing.
+      'vue/require-default-prop': 'off',
     },
   },
 
