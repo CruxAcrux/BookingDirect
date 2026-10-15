@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Bookings;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BookingIndexRequest extends FormRequest
 {
@@ -19,8 +20,11 @@ class BookingIndexRequest extends FormRequest
             /** Last local date, at most 42 days after `from`. */
             'to' => ['required', 'date_format:Y-m-d', 'after_or_equal:from'],
             'barber_id' => ['nullable', 'integer'],
-            /** Include cancelled bookings. */
-            'with_cancelled' => ['sometimes', 'boolean'],
+            /**
+             * Include cancelled bookings. Query strings carry "true"/"false" as text, which
+             * Laravel's boolean rule rejects, so those spellings are listed explicitly.
+             */
+            'with_cancelled' => ['sometimes', Rule::in(['1', '0', 'true', 'false'])],
         ];
     }
 

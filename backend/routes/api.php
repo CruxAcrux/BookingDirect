@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\V1\Barbers\BarberScheduleController;
 use App\Http\Controllers\Api\V1\Barbers\PortfolioController;
 use App\Http\Controllers\Api\V1\Barbers\TimeOffController;
 use App\Http\Controllers\Api\V1\Bookings\BookingController;
+use App\Http\Controllers\Api\V1\Calendar\CalendarController;
+use App\Http\Controllers\Api\V1\Customers\CustomerSearchController;
 use App\Http\Controllers\Api\V1\MeController;
 use App\Http\Controllers\Api\V1\Public\AvailabilityController;
 use App\Http\Controllers\Api\V1\Public\CustomerBookingController;
@@ -76,6 +78,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('shop/{type}', [ShopImageController::class, 'destroy'])->whereIn('type', ['logo', 'cover']);
         Route::get('shop/opening-hours', [OpeningHoursController::class, 'index']);
         Route::put('shop/opening-hours', [OpeningHoursController::class, 'update']);
+
+        Route::get('calendar', [CalendarController::class, 'show']);
+        Route::get('customers', CustomerSearchController::class);
 
         Route::apiResource('bookings', BookingController::class)->except('destroy');
         Route::post('bookings/{booking}/cancel', [BookingController::class, 'cancel']);

@@ -37,8 +37,12 @@ it('lists bookings in a date range', function () {
         ->assertJsonPath('data.0.starts_at_local', '2027-06-14T10:00');
 
     $this->actingAs($this->owner)
-        ->getJson('/api/v1/bookings?from=2027-06-14&to=2027-06-15&with_cancelled=1')
+        ->getJson('/api/v1/bookings?from=2027-06-14&to=2027-06-15&with_cancelled=true')
         ->assertJsonCount(3, 'data');
+
+    $this->actingAs($this->owner)
+        ->getJson('/api/v1/bookings?from=2027-06-14&to=2027-06-15&with_cancelled=false')
+        ->assertJsonCount(2, 'data');
 });
 
 it('shows barbers only their own bookings', function () {

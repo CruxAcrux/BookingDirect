@@ -112,8 +112,14 @@
     "noShop": "Du är inte kopplad till någon aktiv salong. Kontakta salongens ägare.",
     "adminNoShop": "Du är plattformsadministratör och inte kopplad till någon salong.",
     "today": {
-      "title": "Dagens schema",
-      "body": "Här samlas dagens bokningar och drop-in-kön."
+      "title": "Idag",
+      "count": "{left} kvar av {total}",
+      "empty": "Inga fler bokningar idag."
+    },
+    "openCalendar": "Öppna kalendern",
+    "toMark": {
+      "title": "Att markera",
+      "empty": "Alla besök är markerade."
     }
   },
   "common": {
@@ -140,7 +146,8 @@
     "team": "Team",
     "services": "Tjänster",
     "settings": "Salongen",
-    "adminShops": "Salonger"
+    "adminShops": "Salonger",
+    "calendar": "Kalender"
   },
   "upload": {
     "choose": "Välj bild",
@@ -448,5 +455,57 @@
     "noneUpcoming": "Inga kommande bokningar.",
     "history": "Tidigare",
     "bookAgain": "Boka igen"
+  },
+  "calendar": {
+    "kicker": "Kalender",
+    "newBooking": "Ny bokning",
+    "navigation": "Bläddra",
+    "previous": "Föregående",
+    "next": "Nästa",
+    "today": "Idag",
+    "pickDate": "Välj datum",
+    "view": "Vy",
+    "views": {
+      "day": "Dag",
+      "week": "Vecka"
+    },
+    "showCancelled": "Visa avbokade",
+    "noBarbers": "Inga barberare att visa.",
+    "openBooking": "Bokning {time}, {name}",
+    "needsOutcome": "Markera utfall",
+    "created": "Bokningen är skapad.",
+    "moved": "Bokningen är flyttad.",
+    "cancelled": "Bokningen är avbokad.",
+    "marked": "Utfallet är sparat.",
+    "fields": {
+      "service": "Tjänst",
+      "barber": "Barberare",
+      "date": "Datum",
+      "time": "Tid",
+      "customer": "Kund",
+      "name": "Namn",
+      "phone": "Telefon",
+      "email": "E-post",
+      "staffNote": "Intern anteckning"
+    },
+    "searchCustomer": "Sök befintlig kund",
+    "searchHint": "Namn eller telefonnummer.",
+    "staffRules": "Personal kan boka utanför öppettiderna, men aldrig två kunder samtidigt hos samma barberare.",
+    "book": "Boka",
+    "price": "Pris",
+    "customerNote": "Kundens meddelande",
+    "cancellationMessage": "Meddelande vid avbokning",
+    "source": {
+      "online": "Bokad på nätet",
+      "staff": "Bokad av personal",
+      "walk_in": "Drop-in"
+    },
+    "markCompleted": "Genomförd",
+    "markNoShow": "Uteblev",
+    "move": "Flytta",
+    "confirmMove": "Flytta bokningen",
+    "cancel": "Avboka",
+    "cancelMessage": "Meddelande till kunden (valfritt)",
+    "confirmCancel": "Avboka tiden"
   }
 }
