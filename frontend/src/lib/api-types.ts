@@ -861,6 +861,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/sms-messages': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List the text messages the shop has sent, newest first
+     * @description No SMS provider is connected, so this log is where messages to customers can be read.
+     */
+    get: operations['smsMessage.index']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/barbers/{barber}/time-off': {
     parameters: {
       query?: never
@@ -1246,6 +1266,27 @@ export interface components {
       /** @description The barber who would be booked: the first free one in team order. */
       barber_id: number
     }
+    /** SmsMessageResource */
+    SmsMessageResource: {
+      id: number
+      to: string
+      body: string
+      type: components['schemas']['SmsType']
+      /** Format: date-time */
+      sent_at: string
+      booking_id: number | null
+    }
+    /**
+     * SmsType
+     * @enum {string}
+     */
+    SmsType:
+      | 'otp'
+      | 'booking_confirmed'
+      | 'booking_rescheduled'
+      | 'booking_cancelled'
+      | 'reminder_24h'
+      | 'reminder_2h'
     /** StoreBookingRequest */
     StoreBookingRequest: {
       barber_id: number
@@ -1917,8 +1958,11 @@ export interface operations {
         /** @description Last local date, at most 42 days after `from`. */
         to: string
         barber_id?: number | null
-        /** @description Include cancelled bookings. */
-        with_cancelled?: boolean
+        /**
+         * @description Include cancelled bookings. Query strings carry "true"/"false" as text, which
+         *     Laravel's boolean rule rejects, so those spellings are listed explicitly.
+         */
+        with_cancelled?: '1' | '0' | 'true' | 'false'
       }
       header?: never
       path?: never
@@ -2111,8 +2155,11 @@ export interface operations {
         /** @description Last local date, at most 42 days after `from`. */
         to: string
         barber_id?: number | null
-        /** @description Include cancelled bookings. */
-        with_cancelled?: boolean
+        /**
+         * @description Include cancelled bookings. Query strings carry "true"/"false" as text, which
+         *     Laravel's boolean rule rejects, so those spellings are listed explicitly.
+         */
+        with_cancelled?: '1' | '0' | 'true' | 'false'
       }
       header?: never
       path?: never
@@ -3226,6 +3273,61 @@ export interface operations {
       }
       401: components['responses']['AuthenticationException']
       403: components['responses']['AuthorizationException']
+    }
+  }
+  'smsMessage.index': {
+    parameters: {
+      query?: {
+        type?: components['schemas']['SmsType'] | null
+        /** @description Digits of the phone number, e.g. "0701" finds +46701… */
+        phone?: string | null
+        page?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Paginated set of `SmsMessageResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['SmsMessageResource'][]
+            links: {
+              first: string | null
+              last: string | null
+              prev: string | null
+              next: string | null
+            }
+            meta: {
+              current_page: number
+              from: number | null
+              last_page: number
+              /** @description Generated paginator links. */
+              links: {
+                url: string | null
+                label: string
+                active: boolean
+              }[]
+              /** @description Base path for paginator generated URLs. */
+              path: string | null
+              /** @description Number of items shown per page. */
+              per_page: number
+              /** @description Number of the last item in the slice. */
+              to: number | null
+              /** @description Total number of items being paginated. */
+              total: number
+            }
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
     }
   }
   'time-off.index': {
