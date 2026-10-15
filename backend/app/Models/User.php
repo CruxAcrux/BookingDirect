@@ -68,6 +68,14 @@ class User extends Authenticatable implements HasLocalePreference
         return $shop?->membership->role;
     }
 
+    /** The user's barber profile in the current shop, if they cut hair there. */
+    public function barberProfileId(): ?int
+    {
+        $id = Barber::where('user_id', $this->id)->value('id');
+
+        return is_numeric($id) ? (int) $id : null;
+    }
+
     public function isOwnerOf(Shop $shop): bool
     {
         return $this->roleIn($shop) === ShopRole::Owner;

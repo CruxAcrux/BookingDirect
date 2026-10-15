@@ -4,6 +4,45 @@
  */
 
 export interface paths {
+  '/public/shops/{shop}/availability': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Free start times per local date, for up to 14 days
+     * @description Every date in the range is listed, also those without free times. When several barbers
+     *     are free at the same time, the slot names the one that would be booked: the first in
+     *     team order.
+     */
+    get: operations['availability.index']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/availability/next': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** The earliest free time, or null when nothing is free within the booking horizon */
+    get: operations['availability.next']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/barbers/order': {
     parameters: {
       query?: never
@@ -165,6 +204,227 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/bookings': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Bookings in a date range, for the calendar
+     * @description Owners see every barber; barbers only see their own bookings. Cancelled bookings are
+     *     left out unless `with_cancelled` is set.
+     */
+    get: operations['bookings.index']
+    put?: never
+    /**
+     * Create a booking for a customer, e.g. one who phoned
+     * @description Opening hours and booking notice do not apply to staff; double-booking is refused
+     *     with `409`. The customer is matched by phone number or created.
+     */
+    post: operations['bookings.store']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/bookings/{booking}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** A single booking */
+    get: operations['bookings.show']
+    /** Move a booking to another time or barber, or change the staff note */
+    put: operations['bookings.update']
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/bookings/{booking}/cancel': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Cancel a booking, optionally with a message for the customer */
+    post: operations['booking.cancel']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/bookings/{booking}/outcome': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Mark how a visit went: completed or no-show */
+    post: operations['booking.outcome']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/me/bookings': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** The customer's bookings at this shop: upcoming first, then the most recent past ones */
+    get: operations['customerBooking.index']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/bookings': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Book a time
+     * @description The customer must be signed in with an SMS code. The response contains `manage_token`,
+     *     the secret for the customer's manage-booking link; it is only ever returned here.
+     */
+    post: operations['customerBooking.store']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/me/bookings/{booking}/cancel': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Cancel one of the customer's bookings, within the shop's cancellation window */
+    post: operations['customerBooking.cancel']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/me/bookings/{booking}/reschedule': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Move one of the customer's bookings to another free time, within the cancellation window */
+    post: operations['customerBooking.reschedule']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/otp': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Text a six-digit sign-in code to a phone number
+     * @description Limited to three codes per number every ten minutes.
+     */
+    post: operations['customerSession.requestCode']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/otp/verify': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Sign in with the code. The customer is created on first sign-in */
+    post: operations['customerSession.verify']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/me': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** The signed-in customer of this shop */
+    get: operations['customerSession.me']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}/logout': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Sign the customer out */
+    post: operations['customerSession.logout']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/auth/forgot-password': {
     parameters: {
       query?: never
@@ -217,6 +477,57 @@ export interface paths {
     put?: never
     /** Sign out and end the session */
     post: operations['auth.logout']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/bookings/{token}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** A booking by its manage token */
+    get: operations['manageBooking.show']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/bookings/{token}/cancel': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Cancel a booking by its manage token, within the shop's cancellation window */
+    post: operations['manageBooking.cancel']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/bookings/{token}/reschedule': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Move a booking by its manage token to another free time, within the cancellation window */
+    post: operations['manageBooking.reschedule']
     delete?: never
     options?: never
     head?: never
@@ -312,6 +623,23 @@ export interface paths {
     post?: never
     /** Remove an image from a barber's portfolio */
     delete: operations['portfolio.destroy']
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/public/shops/{shop}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** A shop's public profile: details, opening hours, services and barbers */
+    get: operations['publicShop.show']
+    put?: never
+    post?: never
+    delete?: never
     options?: never
     head?: never
     patch?: never
@@ -551,6 +879,12 @@ export interface components {
         email: string
       }[]
     }
+    /** AvailabilityDayResource */
+    AvailabilityDayResource: {
+      /** @description Local date, e.g. 2026-11-03. */
+      date: string
+      slots: components['schemas']['SlotResource'][]
+    }
     /** BarberRequest */
     BarberRequest: {
       display_name: string
@@ -578,6 +912,72 @@ export interface components {
         price_ore: number | null
         duration_minutes: number | null
       }[]
+    }
+    /** BookingResource */
+    BookingResource: {
+      id: number
+      status: components['schemas']['BookingStatus']
+      source: components['schemas']['BookingSource']
+      barber_id: number
+      starts_at: string
+      ends_at: string
+      /** @description End of the cleanup buffer: the barber is busy until then. */
+      blocked_until: string
+      starts_at_local: string
+      ends_at_local: string
+      duration_minutes: number
+      buffer_minutes: number
+      price_ore: number
+      customer_note: string | null
+      staff_note: string | null
+      service: {
+        id: number
+        name: string
+      }
+      customer: {
+        id: number
+        name: string | null
+        phone: string
+        email: string | null
+      }
+      cancelled_at: string | null
+      cancelled_by: components['schemas']['CancelledBy'] | null
+      cancellation_message: string | null
+    }
+    /**
+     * BookingSource
+     * @enum {string}
+     */
+    BookingSource: 'online' | 'staff' | 'walk_in'
+    /**
+     * BookingStatus
+     * @description | |
+     *     |---|
+     *     | `pending` <br/> Holds a slot without a confirmed customer yet (e.g. a waitlist claim). |
+     *     | `confirmed` <br/>  |
+     *     | `completed` <br/>  |
+     *     | `cancelled` <br/>  |
+     *     | `no_show` <br/>  |
+     * @enum {string}
+     */
+    BookingStatus: 'pending' | 'confirmed' | 'completed' | 'cancelled' | 'no_show'
+    /**
+     * CancelledBy
+     * @enum {string}
+     */
+    CancelledBy: 'customer' | 'staff'
+    /** CreateBookingRequest */
+    CreateBookingRequest: {
+      service_id: number
+      /** @description Leave out to book whoever is free first at that time. */
+      barber_id?: number | null
+      /** @description A start time from the availability endpoint, e.g. 2026-11-03T08:15:00Z. */
+      starts_at: string
+      /** @description Required the first time a customer books. */
+      name?: string | null
+      /** Format: email */
+      email?: string | null
+      note?: string | null
     }
     /** CurrentUserResource */
     CurrentUserResource: {
@@ -624,9 +1024,100 @@ export interface components {
       caption: string | null
       sort_order: number
     }
+    /** PublicBookingResource */
+    PublicBookingResource: {
+      id: number
+      status: components['schemas']['BookingStatus']
+      starts_at: string
+      ends_at: string
+      /** @description Local time in the shop's timezone, e.g. "2026-11-03T09:15". */
+      starts_at_local: string
+      ends_at_local: string
+      duration_minutes: number
+      price_ore: number
+      note: string | null
+      service: {
+        id: number
+        name: string
+      }
+      barber: {
+        id: number
+        display_name: string
+      }
+      shop: {
+        name: string
+        slug: string
+        address: string | null
+        phone: string | null
+        timezone: string
+      }
+      /** @description Whether the customer can still cancel or move the booking online. */
+      can_change: boolean
+      /** @description The last moment the customer can cancel or move online. */
+      change_deadline: string
+    }
+    /** PublicCustomerResource */
+    PublicCustomerResource: {
+      id: number
+      name: string | null
+      phone: string
+      email: string | null
+    }
+    /** PublicShopResource */
+    PublicShopResource: {
+      name: string
+      slug: string
+      address: string | null
+      phone: string | null
+      email: string | null
+      timezone: string
+      locale: string
+      logo_url: string | null
+      cover_url: string | null
+      max_days_ahead: number
+      cancellation_window_hours: number
+      walk_ins_enabled: boolean
+      opening_hours: components['schemas']['WeeklyHourResource'][]
+      services: {
+        id: number
+        name: string
+        description: string | null
+        duration_minutes: number
+        price_ore: number
+      }[]
+      barbers: {
+        id: number
+        display_name: string
+        bio: string | null
+        avatar_url: string | null
+        /** @description Services this barber offers, with their own price and duration. */
+        services: {
+          service_id: number
+          price_ore: number
+          duration_minutes: number
+        }[]
+        portfolio: {
+          id: number
+          url: string
+          thumbnail_url: string
+          caption: string | null
+        }[]
+      }[]
+    }
     /** ReorderRequest */
     ReorderRequest: {
       ids: number[]
+    }
+    /** RequestOtpRequest */
+    RequestOtpRequest: {
+      /** @description Swedish numbers without a country code are accepted, e.g. 070-123 45 67. */
+      phone: string
+    }
+    /** RescheduleBookingRequest */
+    RescheduleBookingRequest: {
+      starts_at: string
+      /** @description Leave out to keep any barber who is free at the new time. */
+      barber_id?: number | null
     }
     /** ResetPasswordRequest */
     ResetPasswordRequest: {
@@ -693,6 +1184,27 @@ export interface components {
      * @enum {string}
      */
     ShopRole: 'owner' | 'barber'
+    /** SlotResource */
+    SlotResource: {
+      starts_at: string
+      date: string
+      time: string
+      /** @description The barber who would be booked: the first free one in team order. */
+      barber_id: number
+    }
+    /** StoreBookingRequest */
+    StoreBookingRequest: {
+      barber_id: number
+      service_id: number
+      starts_at: string
+      customer: {
+        name: string
+        phone: string
+        /** Format: email */
+        email?: string | null
+      }
+      staff_note?: string | null
+    }
     /** StoreShopRequest */
     StoreShopRequest: {
       name: string
@@ -746,6 +1258,14 @@ export interface components {
       reason: components['schemas']['TimeOffReason']
       note: string | null
     }
+    /** UpdateBookingRequest */
+    UpdateBookingRequest: {
+      /** @description Move the booking to this time. */
+      starts_at?: string
+      /** @description Move the booking to another barber. */
+      barber_id?: number
+      staff_note?: string | null
+    }
     /** UpdateShopRequest */
     UpdateShopRequest: {
       name?: string
@@ -763,6 +1283,12 @@ export interface components {
       /** @enum {integer} */
       slot_interval_minutes?: 5 | 10 | 15 | 20 | 30 | 60
       walk_ins_enabled?: boolean
+    }
+    /** VerifyOtpRequest */
+    VerifyOtpRequest: {
+      /** @description Swedish numbers without a country code are accepted, e.g. 070-123 45 67. */
+      phone: string
+      code: string
     }
     /** WeeklyHourResource */
     WeeklyHourResource: {
@@ -812,8 +1338,8 @@ export interface components {
         }
       }
     }
-    /** @description Authorization error */
-    AuthorizationException: {
+    /** @description Not found */
+    ModelNotFoundException: {
       headers: {
         [name: string]: unknown
       }
@@ -824,8 +1350,8 @@ export interface components {
         }
       }
     }
-    /** @description Not found */
-    ModelNotFoundException: {
+    /** @description Authorization error */
+    AuthorizationException: {
       headers: {
         [name: string]: unknown
       }
@@ -844,6 +1370,75 @@ export interface components {
 }
 export type $defs = Record<string, never>
 export interface operations {
+  'availability.index': {
+    parameters: {
+      query: {
+        service_id: number
+        /** @description Leave out for "first available": every barber who offers the service. */
+        barber_id?: number | null
+        /** @description First local date, e.g. 2026-11-03. */
+        from: string
+        /** @description Last local date, at most 14 days after `from`. */
+        to: string
+      }
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `AvailabilityDayResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['AvailabilityDayResource'][]
+          }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'availability.next': {
+    parameters: {
+      query: {
+        service_id: number
+        barber_id?: number | null
+      }
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `SlotResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json':
+            | {
+                data: null
+              }
+            | {
+                data: components['schemas']['SlotResource']
+              }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
   'barber.reorder': {
     parameters: {
       query?: never
@@ -1260,6 +1855,427 @@ export interface operations {
       422: components['responses']['ValidationException']
     }
   }
+  'bookings.index': {
+    parameters: {
+      query: {
+        /** @description First local date, e.g. 2026-11-02. */
+        from: string
+        /** @description Last local date, at most 42 days after `from`. */
+        to: string
+        barber_id?: number | null
+        /** @description Include cancelled bookings. */
+        with_cancelled?: boolean
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `BookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BookingResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'bookings.store': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['StoreBookingRequest']
+      }
+    }
+    responses: {
+      /** @description `BookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BookingResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'bookings.show': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The booking ID */
+        booking: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `BookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BookingResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'bookings.update': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The booking ID */
+        booking: number
+      }
+      cookie?: never
+    }
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['UpdateBookingRequest']
+      }
+    }
+    responses: {
+      /** @description `BookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BookingResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'booking.cancel': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The booking ID */
+        booking: number
+      }
+      cookie?: never
+    }
+    requestBody?: {
+      content: {
+        'application/json': {
+          message?: string | null
+        }
+      }
+    }
+    responses: {
+      /** @description `BookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BookingResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'booking.outcome': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The booking ID */
+        booking: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': {
+          /** @enum {string} */
+          status: 'completed' | 'no_show'
+        }
+      }
+    }
+    responses: {
+      /** @description `BookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BookingResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'customerBooking.index': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `PublicBookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicBookingResource'][]
+          }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'customerBooking.store': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateBookingRequest']
+      }
+    }
+    responses: {
+      /** @description `PublicBookingResource` */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicBookingResource']
+            manage_token: string
+          }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'customerBooking.cancel': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+        booking: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `PublicBookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicBookingResource']
+          }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'customerBooking.reschedule': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+        booking: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['RescheduleBookingRequest']
+      }
+    }
+    responses: {
+      /** @description `PublicBookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicBookingResource']
+          }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'customerSession.requestCode': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['RequestOtpRequest']
+      }
+    }
+    responses: {
+      202: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            /** @constant */
+            expires_in_minutes: 10
+          }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'customerSession.verify': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['VerifyOtpRequest']
+      }
+    }
+    responses: {
+      /** @description `PublicCustomerResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicCustomerResource']
+          }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'customerSession.me': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `PublicCustomerResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicCustomerResource']
+          }
+        }
+      }
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'customerSession.logout': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description No content */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
   'auth.forgotPassword': {
     parameters: {
       query?: never
@@ -1343,6 +2359,83 @@ export interface operations {
         content?: never
       }
       401: components['responses']['AuthenticationException']
+    }
+  }
+  'manageBooking.show': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        token: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `PublicBookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicBookingResource']
+          }
+        }
+      }
+    }
+  }
+  'manageBooking.cancel': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        token: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `PublicBookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicBookingResource']
+          }
+        }
+      }
+    }
+  }
+  'manageBooking.reschedule': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        token: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['RescheduleBookingRequest']
+      }
+    }
+    responses: {
+      /** @description `PublicBookingResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicBookingResource']
+          }
+        }
+      }
+      422: components['responses']['ValidationException']
     }
   }
   'v1.me': {
@@ -1575,6 +2668,32 @@ export interface operations {
       }
       401: components['responses']['AuthenticationException']
       403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'publicShop.show': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The shop slug */
+        shop: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `PublicShopResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicShopResource']
+          }
+        }
+      }
       404: components['responses']['ModelNotFoundException']
     }
   }

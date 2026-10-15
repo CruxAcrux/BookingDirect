@@ -83,7 +83,3 @@ frontend/    Vue single-page app, organised by feature in src/features
 docker/      Dockerfiles and nginx/PostgreSQL configuration
 .github/     CI workflow
 ```
-
-## License
-
-[MIT](LICENSE)
