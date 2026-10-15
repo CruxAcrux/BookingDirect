@@ -19,5 +19,11 @@ export function useFormat() {
       new Date(`${value}:00Z`),
     )
 
-  return { price, duration, localDateTime }
+  /** Formats an exact instant (e.g. "2026-11-03T08:15:00Z") as seen in a given timezone. */
+  const instant = (value: string, timezone: string, options: Intl.DateTimeFormatOptions) =>
+    new Intl.DateTimeFormat(i18n.locale.value, { ...options, timeZone: timezone }).format(
+      new Date(value),
+    )
+
+  return { price, duration, localDateTime, instant }
 }

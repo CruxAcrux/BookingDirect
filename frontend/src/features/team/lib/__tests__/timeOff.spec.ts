@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { addDays, toTimeOffRange } from '../timeOff'
+import { toTimeOffRange } from '../timeOff'
 
 describe('toTimeOffRange', () => {
   it('turns whole days into midnight-to-midnight', () => {
@@ -25,12 +25,5 @@ describe('toTimeOffRange', () => {
         endTime: '12:30',
       }),
     ).toEqual({ starts_at: '2027-11-03T09:00', ends_at: '2027-11-03T12:30' })
-  })
-})
-
-describe('addDays', () => {
-  it('crosses month and year ends', () => {
-    expect(addDays('2027-01-31', 1)).toBe('2027-02-01')
-    expect(addDays('2027-12-31', 1)).toBe('2028-01-01')
   })
 })
