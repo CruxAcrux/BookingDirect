@@ -10,11 +10,16 @@ const { t } = useI18n()
 const id = useId()
 const dialog = useTemplateRef<HTMLDialogElement>('dialog')
 
-watch(open, async (value) => {
-  await nextTick()
-  if (value && !dialog.value?.open) dialog.value?.showModal()
-  if (!value && dialog.value?.open) dialog.value.close()
-})
+watch(
+  open,
+  async (value) => {
+    await nextTick()
+    if (value && !dialog.value?.open) dialog.value?.showModal()
+    if (!value && dialog.value?.open) dialog.value.close()
+  },
+  // The dialog may be created already open, e.g. when its content appears with v-if.
+  { immediate: true },
+)
 </script>
 
 <template>
