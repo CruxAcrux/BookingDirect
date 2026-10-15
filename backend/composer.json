@@ -8,7 +8,7 @@
         "booking",
         "saas"
     ],
-    "license": "MIT",
+    "license": "proprietary",
     "require": {
         "php": "^8.4",
         "dedoc/scramble": "^0.13.47",
