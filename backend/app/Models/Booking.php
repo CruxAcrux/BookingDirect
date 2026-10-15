@@ -25,6 +25,7 @@ use Illuminate\Support\Str;
  * @property Carbon $starts_at
  * @property Carbon $ends_at
  * @property Carbon $blocked_until
+ * @property Carbon $scheduled_at when the current start time was set (booked or last moved)
  * @property BookingStatus $status
  * @property BookingSource $source
  * @property int $price_ore
@@ -33,9 +34,12 @@ use Illuminate\Support\Str;
  * @property string|null $customer_note
  * @property string|null $staff_note
  * @property string $manage_token_hash
+ * @property string|null $manage_token
  * @property Carbon|null $cancelled_at
  * @property CancelledBy|null $cancelled_by
  * @property string|null $cancellation_message
+ * @property Carbon|null $reminded_24h_at
+ * @property Carbon|null $reminded_2h_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property-read Barber $barber
@@ -47,7 +51,7 @@ use Illuminate\Support\Str;
     'status', 'source', 'price_ore', 'duration_minutes', 'buffer_minutes',
     'customer_note', 'staff_note',
 ])]
-#[Hidden(['manage_token_hash', 'during'])]
+#[Hidden(['manage_token_hash', 'manage_token', 'during'])]
 class Booking extends Model
 {
     use BelongsToShop;
@@ -61,7 +65,17 @@ class Booking extends Model
         'cancelled_at' => null,
         'cancelled_by' => null,
         'cancellation_message' => null,
+        'manage_token' => null,
+        'reminded_24h_at' => null,
+        'reminded_2h_at' => null,
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (Booking $booking): void {
+            $booking->scheduled_at ??= now();
+        });
+    }
 
     protected function casts(): array
     {
@@ -69,7 +83,11 @@ class Booking extends Model
             'starts_at' => 'datetime',
             'ends_at' => 'datetime',
             'blocked_until' => 'datetime',
+            'scheduled_at' => 'datetime',
             'cancelled_at' => 'datetime',
+            'reminded_24h_at' => 'datetime',
+            'reminded_2h_at' => 'datetime',
+            'manage_token' => 'encrypted',
             'status' => BookingStatus::class,
             'source' => BookingSource::class,
             'cancelled_by' => CancelledBy::class,
@@ -77,15 +95,29 @@ class Booking extends Model
     }
 
     /**
-     * Creates a new manage-link token. Only its hash is stored, so the plain token is
-     * returned once and must be sent to the customer right away.
+     * Creates a new manage-link token. It is looked up by its hash and kept encrypted
+     * so messages sent later can still include the link.
      */
     public function issueManageToken(): string
     {
         $token = Str::random(40);
         $this->manage_token_hash = self::hashToken($token);
+        $this->manage_token = $token;
 
         return $token;
+    }
+
+    public function manageUrl(): ?string
+    {
+        return $this->manage_token === null
+            ? null
+            : rtrim(config()->string('app.frontend_url'), '/').'/b/'.$this->manage_token;
+    }
+
+    /** Called when the start time changes, so the new time gets its own reminders. */
+    public function markRescheduled(): void
+    {
+        $this->forceFill(['scheduled_at' => now(), 'reminded_24h_at' => null, 'reminded_2h_at' => null]);
     }
 
     public static function hashToken(string $token): string

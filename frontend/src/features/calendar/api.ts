@@ -40,7 +40,12 @@ export function useStaffBookings(
       (
         await unwrap(
           api.GET('/bookings', {
-            params: { query: { ...toValue(range), with_cancelled: toValue(withCancelled) } },
+            params: {
+              query: {
+                ...toValue(range),
+                with_cancelled: toValue(withCancelled) ? 'true' : 'false',
+              },
+            },
           }),
         )
       ).data,

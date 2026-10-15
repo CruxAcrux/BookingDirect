@@ -14,13 +14,17 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use InvalidArgumentException;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         $this->app->scoped(CurrentShop::class);
-        $this->app->bind(SmsSender::class, LogSmsSender::class);
+        $this->app->bind(SmsSender::class, fn (): SmsSender => match (config('services.sms.driver')) {
+            'log' => new LogSmsSender,
+            default => throw new InvalidArgumentException('Unknown SMS driver ['.config()->string('services.sms.driver').'].'),
+        });
     }
 
     public function boot(): void

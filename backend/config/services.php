@@ -14,6 +14,11 @@ return [
     |
     */
 
+    // Only "log" exists so far: messages are stored for the dashboard instead of being sent.
+    'sms' => [
+        'driver' => env('SMS_DRIVER', 'log'),
+    ],
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],

@@ -147,7 +147,8 @@
     "services": "Services",
     "settings": "Shop",
     "adminShops": "Shops",
-    "calendar": "Calendar"
+    "calendar": "Calendar",
+    "sms": "Sent SMS"
   },
   "upload": {
     "choose": "Choose image",
@@ -507,5 +508,26 @@
     "cancel": "Cancel",
     "cancelMessage": "Message for the customer (optional)",
     "confirmCancel": "Cancel booking"
+  },
+  "sms": {
+    "kicker": "Demo",
+    "title": "Sent SMS",
+    "lead": "No SMS provider is connected, so every text message the shop sends lands here instead. Links work, so you can open a customer's booking page from here.",
+    "type": "Type",
+    "allTypes": "All messages",
+    "phone": "Phone number",
+    "empty": "No messages yet. Book a time on the shop's page and the confirmation shows up here.",
+    "noMatches": "No messages match the filter.",
+    "pagination": "Message pages",
+    "newer": "Newer",
+    "older": "Older",
+    "types": {
+      "booking_confirmed": "Confirmation",
+      "booking_rescheduled": "Moved",
+      "booking_cancelled": "Cancellation",
+      "reminder_24h": "Reminder 24 h",
+      "reminder_2h": "Reminder 2 h",
+      "otp": "Sign-in code"
+    }
   }
 }

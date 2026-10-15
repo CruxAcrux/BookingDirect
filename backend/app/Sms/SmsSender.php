@@ -2,6 +2,8 @@
 
 namespace App\Sms;
 
+use App\Enums\SmsType;
+use App\Models\Shop;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,8 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 interface SmsSender
 {
     /**
+     * @param  Shop  $shop  the shop the message is sent on behalf of
      * @param  string  $to  E.164 phone number
-     * @param  string  $type  what the message is for, e.g. "otp" or "reminder"
      */
-    public function send(string $to, string $body, string $type, ?Model $related = null): void;
+    public function send(Shop $shop, string $to, string $body, SmsType $type, ?Model $related = null): void;
 }

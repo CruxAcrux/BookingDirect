@@ -147,7 +147,8 @@
     "services": "Tjänster",
     "settings": "Salongen",
     "adminShops": "Salonger",
-    "calendar": "Kalender"
+    "calendar": "Kalender",
+    "sms": "Skickade sms"
   },
   "upload": {
     "choose": "Välj bild",
@@ -507,5 +508,26 @@
     "cancel": "Avboka",
     "cancelMessage": "Meddelande till kunden (valfritt)",
     "confirmCancel": "Avboka tiden"
+  },
+  "sms": {
+    "kicker": "Demo",
+    "title": "Skickade sms",
+    "lead": "Ingen sms-tjänst är kopplad, så alla sms som salongen skickar hamnar här i stället. Länkarna fungerar, så du kan öppna kundens bokningssida härifrån.",
+    "type": "Typ",
+    "allTypes": "Alla meddelanden",
+    "phone": "Telefonnummer",
+    "empty": "Inga meddelanden än. Boka en tid på salongens sida så dyker bekräftelsen upp här.",
+    "noMatches": "Inga meddelanden matchar filtret.",
+    "pagination": "Meddelandesidor",
+    "newer": "Nyare",
+    "older": "Äldre",
+    "types": {
+      "booking_confirmed": "Bekräftelse",
+      "booking_rescheduled": "Flyttad",
+      "booking_cancelled": "Avbokning",
+      "reminder_24h": "Påminnelse 24 h",
+      "reminder_2h": "Påminnelse 2 h",
+      "otp": "Inloggningskod"
+    }
   }
 }

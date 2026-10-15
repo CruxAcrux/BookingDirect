@@ -35,7 +35,9 @@ class BookingFactory extends Factory
             'price_ore' => 35000,
             'duration_minutes' => 30,
             'buffer_minutes' => 0,
-            'manage_token_hash' => Booking::hashToken(Str::random(40)),
+            'scheduled_at' => Carbon::now()->subWeek(),
+            'manage_token_hash' => fn (array $attributes) => Booking::hashToken($attributes['manage_token']),
+            'manage_token' => Str::random(40),
         ];
     }
 

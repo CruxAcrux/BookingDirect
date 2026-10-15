@@ -10,6 +10,7 @@ use App\Booking\Exceptions\SlotTakenException;
 use App\Models\Barber;
 use App\Models\Booking;
 use App\Models\Shop;
+use App\Notifications\Booking\BookingRescheduled;
 use Carbon\CarbonImmutable;
 
 class RescheduleBooking
@@ -95,7 +96,7 @@ class RescheduleBooking
 
     private function move(Booking $booking, Barber $barber, CarbonImmutable $startsAt, int $duration, int $price): Booking
     {
-        return $this->writer->write(function () use ($booking, $barber, $startsAt, $duration, $price): Booking {
+        $booking = $this->writer->write(function () use ($booking, $barber, $startsAt, $duration, $price): Booking {
             $endsAt = $startsAt->addMinutes($duration);
 
             $booking->fill([
@@ -105,9 +106,15 @@ class RescheduleBooking
                 'blocked_until' => $endsAt->addMinutes($booking->buffer_minutes),
                 'duration_minutes' => $duration,
                 'price_ore' => $price,
-            ])->save();
+            ]);
+            $booking->markRescheduled();
+            $booking->save();
 
             return $booking;
         });
+
+        $booking->customer->notify(new BookingRescheduled($booking));
+
+        return $booking;
     }
 }

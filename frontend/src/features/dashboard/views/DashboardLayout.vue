@@ -35,7 +35,10 @@ const navigation = computed(() => {
       { name: 'services', label: t('nav.services'), matches: ['services'] },
     )
     if (shop.role === 'owner') {
-      items.push({ name: 'settings', label: t('nav.settings'), matches: ['settings', 'settings-'] })
+      items.push(
+        { name: 'settings', label: t('nav.settings'), matches: ['settings', 'settings-'] },
+        { name: 'sms', label: t('nav.sms'), matches: ['sms'] },
+      )
     }
   }
   if (auth.user?.is_platform_admin) {
