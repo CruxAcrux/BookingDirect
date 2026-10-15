@@ -19,7 +19,9 @@ import { useErrorText } from '@/lib/forms/useErrorText'
 
 import { useTimeOff, useTimeOffMutations, type TimeOff } from '../api'
 import { useBarberContext } from '../composables/useBarberContext'
-import { addDays, toTimeOffRange } from '../lib/timeOff'
+import { addDays } from '@/lib/dates'
+
+import { toTimeOffRange } from '../lib/timeOff'
 
 const REASONS = ['vacation', 'sick', 'other'] as const
 

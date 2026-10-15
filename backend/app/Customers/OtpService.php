@@ -22,7 +22,10 @@ class OtpService
 
     public function __construct(private readonly SmsSender $sms) {}
 
-    public function send(Shop $shop, string $phone): void
+    /**
+     * @return string the code, so demo mode can show it; never expose it otherwise
+     */
+    public function send(Shop $shop, string $phone): string
     {
         $code = str_pad((string) random_int(0, 999_999), 6, '0', STR_PAD_LEFT);
 
@@ -37,6 +40,8 @@ class OtpService
         });
 
         $this->sms->send($phone, __('booking.sms.otp', ['code' => $code, 'shop' => $shop->name, 'minutes' => self::TTL_MINUTES]), 'otp');
+
+        return $code;
     }
 
     /**

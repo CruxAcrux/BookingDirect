@@ -19,7 +19,7 @@ function route(meta: RouteLocationNormalized['meta'], query = {}): RouteLocation
 }
 
 function signedInAs(user: ReturnType<typeof makeUser> | null) {
-  getMock.mockResolvedValue(apiResult(user ? 200 : 401, user ? { data: user } : {}) as never)
+  getMock.mockResolvedValue(apiResult(user ? 200 : 401, user ? { data: user } : {}))
 }
 
 beforeEach(() => {

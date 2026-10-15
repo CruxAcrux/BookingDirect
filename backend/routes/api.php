@@ -52,10 +52,10 @@ Route::prefix('public')->group(function () {
         });
     });
 
-    Route::prefix('bookings/{token}')->middleware(['manage.booking', 'throttle:public-booking'])->group(function () {
-        Route::get('/', [ManageBookingController::class, 'show']);
-        Route::post('cancel', [ManageBookingController::class, 'cancel']);
-        Route::post('reschedule', [ManageBookingController::class, 'reschedule']);
+    Route::prefix('bookings/{token}')->middleware('manage.booking')->group(function () {
+        Route::get('/', [ManageBookingController::class, 'show'])->middleware('throttle:availability');
+        Route::post('cancel', [ManageBookingController::class, 'cancel'])->middleware('throttle:public-booking');
+        Route::post('reschedule', [ManageBookingController::class, 'reschedule'])->middleware('throttle:public-booking');
     });
 });
 

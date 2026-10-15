@@ -131,7 +131,8 @@
     "daysShort": "dagar",
     "hoursShort": "tim",
     "moveUp": "Flytta upp {name}",
-    "moveDown": "Flytta ned {name}"
+    "moveDown": "Flytta ned {name}",
+    "retry": "Försök igen"
   },
   "nav": {
     "label": "Huvudmeny",
@@ -332,5 +333,120 @@
     "previous": "Föregående",
     "next": "Nästa",
     "page": "Sida {page} av {total}"
+  },
+  "shop": {
+    "kicker": "Barbershop",
+    "book": "Boka tid",
+    "myBookings": "Mina bokningar",
+    "hours": "Öppettider",
+    "openNow": "Öppet nu",
+    "closedNow": "Stängt nu",
+    "today": "idag",
+    "services": "Tjänster",
+    "barbers": "Barberare",
+    "bookWith": "Boka hos {name}",
+    "portfolio": "Arbeten av {name}",
+    "poweredBy": "Bokningar via"
+  },
+  "booking": {
+    "title": "Boka tid",
+    "summary": "Din bokning",
+    "steps": {
+      "label": "Steg",
+      "service": "Tjänst",
+      "barber": "Barberare",
+      "time": "Tid",
+      "details": "Uppgifter"
+    },
+    "service": {
+      "title": "Vad vill du göra?"
+    },
+    "barber": {
+      "title": "Vem vill du gå till?",
+      "any": "Första lediga",
+      "anyHint": "Visar de tidigaste tiderna hos alla barberare.",
+      "soonest": "Snabbast",
+      "none": "Ingen barberare gör den här tjänsten just nu."
+    },
+    "time": {
+      "title": "Välj en tid",
+      "day": "Dag",
+      "time": "Tid",
+      "earlier": "Tidigare dagar",
+      "later": "Senare dagar",
+      "noneInWindow": "Inga lediga tider de här dagarna. Prova senare dagar."
+    },
+    "details": {
+      "title": "Dina uppgifter",
+      "name": "Namn",
+      "email": "E-post (valfritt)",
+      "emailHint": "Vi skickar en bekräftelse dit.",
+      "note": "Meddelande till barberaren (valfritt)",
+      "phone": "Mobilnummer",
+      "phoneHint": "Vi skickar en kod för att bekräfta numret.",
+      "confirm": "Bekräfta bokningen",
+      "signedInAs": "Inloggad som {phone}.",
+      "cancellation": "Du kan avboka eller flytta tiden fram till {hours} timmar innan."
+    },
+    "otp": {
+      "send": "Skicka kod",
+      "resend": "Skicka en ny kod",
+      "change": "Byt nummer",
+      "code": "Kod från sms",
+      "sentTo": "Vi har skickat en kod till {phone}.",
+      "demo": "Demokod",
+      "sixDigits": "Koden har sex siffror.",
+      "sendFirst": "Skicka och fyll i koden från sms:et först."
+    },
+    "ticket": {
+      "label": "Din bokning"
+    },
+    "status": {
+      "pending": "Preliminär",
+      "confirmed": "Bekräftad",
+      "completed": "Genomförd",
+      "cancelled": "Avbokad",
+      "no_show": "Uteblev"
+    }
+  },
+  "manage": {
+    "kicker": "Din bokning",
+    "bookedKicker": "Klart",
+    "bookedTitle": "Du är bokad.",
+    "bookedBody": "Spara länken nedan, där kan du flytta eller avboka tiden.",
+    "title": {
+      "pending": "Preliminär bokning",
+      "confirmed": "Vi ses snart.",
+      "completed": "Tack för besöket.",
+      "cancelled": "Bokningen är avbokad.",
+      "no_show": "Du kom inte."
+    },
+    "linkTitle": "Din bokningslänk",
+    "linkBody": "Den här sidan är din. Alla med länken kan ändra bokningen, så dela den inte.",
+    "copy": "Kopiera länken",
+    "copied": "Kopierad",
+    "move": "Flytta tiden",
+    "moveTitle": "Välj en ny tid",
+    "keepBarber": "Behåll {name}",
+    "moved": "Bokningen är flyttad.",
+    "cancel": "Avboka",
+    "cancelTitle": "Avboka tiden?",
+    "cancelBody": "Tiden blir ledig för någon annan.",
+    "cancelled": "Bokningen är avbokad.",
+    "deadline": "Du kan ändra eller avboka fram till {when}.",
+    "tooLate": "Det är för sent att ändra på nätet. Ring salongen: {phone}",
+    "where": "Var",
+    "bookAgain": "Boka samma igen"
+  },
+  "myBookings": {
+    "title": "Mina bokningar",
+    "signIn": "Logga in med mobilnummer",
+    "signInBody": "Vi skickar en kod med sms. Inget lösenord behövs.",
+    "signInButton": "Logga in",
+    "signOut": "Logga ut",
+    "upcoming": "Kommande",
+    "noneUpcoming": "Inga kommande bokningar.",
+    "history": "Tidigare",
+    "bookAgain": "Boka igen"
   }
 }

@@ -36,12 +36,13 @@ docker compose exec backend php artisan migrate --seed
 
 The first start installs dependencies and creates `backend/.env` from `backend/.env.example`, so it takes a minute.
 
-| Service                     | URL                            |
-| --------------------------- | ------------------------------ |
-| App                         | http://localhost:5173          |
-| API                         | http://localhost:8000          |
-| API documentation (OpenAPI) | http://localhost:8000/docs/api |
-| Mailpit (development email) | http://localhost:8025          |
+| Service                     | URL                                 |
+| --------------------------- | ----------------------------------- |
+| App                         | http://localhost:5173               |
+| Demo shop booking page      | http://localhost:5173/s/fade-studio |
+| API                         | http://localhost:8000               |
+| API documentation (OpenAPI) | http://localhost:8000/docs/api      |
+| Mailpit (development email) | http://localhost:8025               |
 
 If one of these ports is already taken, copy `.env.example` in the project root to `.env` and change it there.
 
@@ -57,6 +58,10 @@ The seeder creates these local accounts. The password is `password` for all of t
 
 Staff sign in at http://localhost:5173/login.
 
+### Booking as a customer
+
+Customers book on the shop's page and confirm their phone number with a one-time SMS code. No SMS provider is connected in development, so the code is shown on screen as a demo code (set `OTP_DEMO_MODE=false` in `backend/.env` to turn this off).
+
 ## Running tests and checks
 
 ```bash
@@ -69,6 +74,9 @@ docker compose exec backend ./vendor/bin/phpstan analyse
 docker compose exec frontend npm test
 docker compose exec frontend npm run lint
 docker compose exec frontend npm run typecheck
+
+# End-to-end (books a real appointment against the running stack with seeded data)
+docker compose run --rm e2e
 ```
 
 The frontend's API types are generated from the backend's OpenAPI spec. After changing an endpoint, regenerate them with `docker compose exec frontend npm run api:types`.

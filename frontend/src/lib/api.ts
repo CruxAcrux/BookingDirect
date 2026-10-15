@@ -39,7 +39,10 @@ export function onUnauthorized(handler: () => void): void {
 
 const sessionMiddleware: Middleware = {
   onResponse({ response, schemaPath }) {
-    if (response.status === 401 && schemaPath !== '/me') unauthorizedHandler?.()
+    // Public pages have their own customer sign-in; their 401s say nothing about staff.
+    if (response.status === 401 && schemaPath !== '/me' && !schemaPath.startsWith('/public/')) {
+      unauthorizedHandler?.()
+    }
     return response
   },
 }

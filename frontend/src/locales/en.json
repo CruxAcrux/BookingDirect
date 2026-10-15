@@ -131,7 +131,8 @@
     "daysShort": "days",
     "hoursShort": "hrs",
     "moveUp": "Move {name} up",
-    "moveDown": "Move {name} down"
+    "moveDown": "Move {name} down",
+    "retry": "Try again"
   },
   "nav": {
     "label": "Main menu",
@@ -332,5 +333,120 @@
     "previous": "Previous",
     "next": "Next",
     "page": "Page {page} of {total}"
+  },
+  "shop": {
+    "kicker": "Barbershop",
+    "book": "Book a time",
+    "myBookings": "My bookings",
+    "hours": "Opening hours",
+    "openNow": "Open now",
+    "closedNow": "Closed now",
+    "today": "today",
+    "services": "Services",
+    "barbers": "Barbers",
+    "bookWith": "Book with {name}",
+    "portfolio": "Work by {name}",
+    "poweredBy": "Bookings by"
+  },
+  "booking": {
+    "title": "Book a time",
+    "summary": "Your booking",
+    "steps": {
+      "label": "Steps",
+      "service": "Service",
+      "barber": "Barber",
+      "time": "Time",
+      "details": "Details"
+    },
+    "service": {
+      "title": "What would you like?"
+    },
+    "barber": {
+      "title": "Who would you like?",
+      "any": "First available",
+      "anyHint": "Shows the earliest times across all barbers.",
+      "soonest": "Soonest",
+      "none": "No barber offers this service right now."
+    },
+    "time": {
+      "title": "Pick a time",
+      "day": "Day",
+      "time": "Time",
+      "earlier": "Earlier days",
+      "later": "Later days",
+      "noneInWindow": "No free times on these days. Try later days."
+    },
+    "details": {
+      "title": "Your details",
+      "name": "Name",
+      "email": "Email (optional)",
+      "emailHint": "We send a confirmation there.",
+      "note": "Message for the barber (optional)",
+      "phone": "Mobile number",
+      "phoneHint": "We text you a code to confirm the number.",
+      "confirm": "Confirm booking",
+      "signedInAs": "Signed in as {phone}.",
+      "cancellation": "You can cancel or move the booking until {hours} hours before."
+    },
+    "otp": {
+      "send": "Send code",
+      "resend": "Send a new code",
+      "change": "Change number",
+      "code": "Code from SMS",
+      "sentTo": "We sent a code to {phone}.",
+      "demo": "Demo code",
+      "sixDigits": "The code has six digits.",
+      "sendFirst": "Send and enter the code from the SMS first."
+    },
+    "ticket": {
+      "label": "Your booking"
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "no_show": "No-show"
+    }
+  },
+  "manage": {
+    "kicker": "Your booking",
+    "bookedKicker": "Done",
+    "bookedTitle": "You're booked.",
+    "bookedBody": "Keep the link below; you can move or cancel the booking there.",
+    "title": {
+      "pending": "Pending booking",
+      "confirmed": "See you soon.",
+      "completed": "Thanks for coming.",
+      "cancelled": "The booking is cancelled.",
+      "no_show": "You didn't make it."
+    },
+    "linkTitle": "Your booking link",
+    "linkBody": "This page is yours. Anyone with the link can change the booking, so keep it to yourself.",
+    "copy": "Copy the link",
+    "copied": "Copied",
+    "move": "Move the booking",
+    "moveTitle": "Choose a new time",
+    "keepBarber": "Keep {name}",
+    "moved": "The booking was moved.",
+    "cancel": "Cancel booking",
+    "cancelTitle": "Cancel this booking?",
+    "cancelBody": "The time becomes free for someone else.",
+    "cancelled": "The booking was cancelled.",
+    "deadline": "You can change or cancel until {when}.",
+    "tooLate": "It's too late to change online. Call the shop: {phone}",
+    "where": "Where",
+    "bookAgain": "Book the same again"
+  },
+  "myBookings": {
+    "title": "My bookings",
+    "signIn": "Sign in with your phone number",
+    "signInBody": "We text you a code. No password needed.",
+    "signInButton": "Sign in",
+    "signOut": "Sign out",
+    "upcoming": "Upcoming",
+    "noneUpcoming": "No upcoming bookings.",
+    "history": "Earlier",
+    "bookAgain": "Book again"
   }
 }

@@ -23,15 +23,20 @@ class CustomerSessionController extends Controller
     /**
      * Text a six-digit sign-in code to a phone number.
      *
-     * Limited to three codes per number every ten minutes.
+     * Limited to three codes per number every ten minutes. In demo mode (no real SMS
+     * provider) the response also contains the code as `demo_code`.
      *
      * @unauthenticated
      */
     public function requestCode(RequestOtpRequest $request, Shop $shop): JsonResponse
     {
-        $this->otp->send($shop, $request->phone());
+        $code = $this->otp->send($shop, $request->phone());
 
-        return response()->json(['expires_in_minutes' => OtpService::TTL_MINUTES], 202);
+        return response()->json([
+            'expires_in_minutes' => OtpService::TTL_MINUTES,
+            /** @var string|null */
+            'demo_code' => config('booking.otp_demo_mode') ? $code : null,
+        ], 202);
     }
 
     /**

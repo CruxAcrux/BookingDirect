@@ -24,6 +24,33 @@ const router = createRouter({
       ],
     },
     {
+      path: '/s/:slug',
+      component: () => import('@/features/public-shop/views/ShopLayout.vue'),
+      props: true,
+      children: [
+        {
+          path: '',
+          name: 'shop',
+          component: () => import('@/features/public-shop/views/ShopView.vue'),
+        },
+        {
+          path: 'book',
+          name: 'book',
+          component: () => import('@/features/booking/views/BookingView.vue'),
+        },
+        {
+          path: 'my-bookings',
+          name: 'my-bookings',
+          component: () => import('@/features/manage-booking/views/MyBookingsView.vue'),
+        },
+      ],
+    },
+    {
+      path: '/b/:token',
+      name: 'manage-booking',
+      component: () => import('@/features/manage-booking/views/ManageBookingView.vue'),
+    },
+    {
       path: '/',
       component: () => import('@/features/auth/views/AuthLayout.vue'),
       children: [
@@ -140,7 +167,9 @@ const router = createRouter({
       ],
     },
   ],
-  scrollBehavior: (_to, _from, saved) => saved ?? { top: 0 },
+  // Steps of the booking flow change only the query; keep the scroll position there.
+  scrollBehavior: (to, from, saved) =>
+    saved ?? (to.path === from.path && to.name === 'book' ? false : { top: 0 }),
 })
 
 router.beforeEach(authGuard)

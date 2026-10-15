@@ -365,7 +365,8 @@ export interface paths {
     put?: never
     /**
      * Text a six-digit sign-in code to a phone number
-     * @description Limited to three codes per number every ten minutes.
+     * @description Limited to three codes per number every ten minutes. In demo mode (no real SMS
+     *     provider) the response also contains the code as `demo_code`.
      */
     post: operations['customerSession.requestCode']
     delete?: never
@@ -2190,6 +2191,7 @@ export interface operations {
           'application/json': {
             /** @constant */
             expires_in_minutes: 10
+            demo_code: string | null
           }
         }
       }
