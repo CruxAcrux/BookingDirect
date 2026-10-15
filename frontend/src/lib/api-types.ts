@@ -282,6 +282,28 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/calendar': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Schedules for the calendar grid
+     * @description Opening hours plus, for every barber column, working hours, breaks and time off within
+     *     the range. Owners get every active barber (and inactive ones who still have bookings
+     *     in the range); barbers get only themselves. Bookings come from `GET /bookings`.
+     */
+    get: operations['calendar.show']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/public/shops/{shop}/me/bookings': {
     parameters: {
       query?: never
@@ -348,6 +370,26 @@ export interface paths {
     put?: never
     /** Move one of the customer's bookings to another free time, within the cancellation window */
     post: operations['customerBooking.reschedule']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/customers': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Find customers by name or phone number, for booking on someone's behalf
+     * @description Digits are matched anywhere in the number, so "0701" finds +46701…
+     */
+    get: operations['customers.customerSearch']
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -962,6 +1004,17 @@ export interface components {
      * @enum {string}
      */
     BookingStatus: 'pending' | 'confirmed' | 'completed' | 'cancelled' | 'no_show'
+    /** CalendarBarberResource */
+    CalendarBarberResource: {
+      id: number
+      display_name: string
+      avatar_url: string | null
+      is_active: boolean
+      working_hours: components['schemas']['WeeklyHourResource'][]
+      breaks: components['schemas']['WeeklyHourResource'][]
+      /** @description Time off overlapping the requested range. */
+      time_off: components['schemas']['TimeOffResource'][]
+    }
     /**
      * CancelledBy
      * @enum {string}
@@ -2050,6 +2103,42 @@ export interface operations {
       422: components['responses']['ValidationException']
     }
   }
+  'calendar.show': {
+    parameters: {
+      query: {
+        /** @description First local date, e.g. 2026-11-02. */
+        from: string
+        /** @description Last local date, at most 42 days after `from`. */
+        to: string
+        barber_id?: number | null
+        /** @description Include cancelled bookings. */
+        with_cancelled?: boolean
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: {
+              timezone: string
+              opening_hours: components['schemas']['WeeklyHourResource'][]
+              barbers: components['schemas']['CalendarBarberResource'][]
+            }
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
   'customerBooking.index': {
     parameters: {
       query?: never
@@ -2164,6 +2253,33 @@ export interface operations {
         }
       }
       404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'customers.customerSearch': {
+    parameters: {
+      query: {
+        search: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `PublicCustomerResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PublicCustomerResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
       422: components['responses']['ValidationException']
     }
   }
