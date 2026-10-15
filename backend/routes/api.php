@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\V1\Services\ServiceController;
 use App\Http\Controllers\Api\V1\Shop\OpeningHoursController;
 use App\Http\Controllers\Api\V1\Shop\ShopController;
 use App\Http\Controllers\Api\V1\Shop\ShopImageController;
+use App\Http\Controllers\Api\V1\Sms\SmsMessageController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -81,6 +82,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('calendar', [CalendarController::class, 'show']);
         Route::get('customers', CustomerSearchController::class);
+        Route::get('sms-messages', [SmsMessageController::class, 'index']);
 
         Route::apiResource('bookings', BookingController::class)->except('destroy');
         Route::post('bookings/{booking}/cancel', [BookingController::class, 'cancel']);
