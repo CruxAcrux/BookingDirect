@@ -164,6 +164,12 @@ const router = createRouter({
           ],
         },
         {
+          path: 'sms',
+          name: 'sms',
+          component: () => import('@/features/sms/views/SentSmsView.vue'),
+          meta: { requiresOwner: true },
+        },
+        {
           path: 'admin/shops',
           name: 'admin-shops',
           component: () => import('@/features/admin/views/AdminShopsView.vue'),
