@@ -26,6 +26,8 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      // "frontend" is this server's name inside Docker, used by the end-to-end tests.
+      allowedHosts: ['frontend'],
       // The API is proxied so the SPA and Sanctum share one origin in development.
       proxy: {
         '/api': { target: apiTarget, changeOrigin: false },

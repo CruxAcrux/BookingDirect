@@ -13,7 +13,8 @@ services:
     environment:
       # The SPA is served from the Vite dev server, so session cookies are issued for its origin.
       FRONTEND_URL: http://localhost:${FRONTEND_PORT:-5173}
-      SANCTUM_STATEFUL_DOMAINS: localhost:${FRONTEND_PORT:-5173}
+      # "frontend:5173" is how the end-to-end tests reach the app inside Docker.
+      SANCTUM_STATEFUL_DOMAINS: localhost:${FRONTEND_PORT:-5173},frontend:5173
     depends_on:
       postgres:
         condition: service_healthy
@@ -59,6 +60,21 @@ services:
       API_SPEC_URL: http://nginx/docs/api.json
     depends_on:
       - nginx
+
+  # End-to-end tests: docker compose run --rm e2e
+  e2e:
+    image: mcr.microsoft.com/playwright:v1.64.1-noble
+    profiles: [e2e]
+    user: "${UID:-1000}:${GID:-1000}"
+    working_dir: /app
+    command: npm run e2e
+    environment:
+      HOME: /tmp
+      E2E_BASE_URL: http://frontend:5173
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - frontend
 
   postgres:
     image: postgres:18-alpine
