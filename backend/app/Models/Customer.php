@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
 /**
@@ -39,6 +40,7 @@ class Customer extends Model implements AuthenticatableContract, HasLocalePrefer
     /** @use HasFactory<CustomerFactory> */
     use HasFactory;
 
+    use Notifiable;
     use SoftDeletes;
 
     /** Mirrors the column defaults so freshly created models are complete. */
@@ -60,6 +62,11 @@ class Customer extends Model implements AuthenticatableContract, HasLocalePrefer
     public function getRememberTokenName(): string
     {
         return '';
+    }
+
+    public function routeNotificationForSms(): string
+    {
+        return $this->phone;
     }
 
     public function preferredLocale(): string

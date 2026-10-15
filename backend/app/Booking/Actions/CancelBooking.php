@@ -7,6 +7,7 @@ use App\Enums\BookingStatus;
 use App\Enums\CancelledBy;
 use App\Models\Booking;
 use App\Models\Shop;
+use App\Notifications\Booking\BookingCancelled;
 
 class CancelBooking
 {
@@ -44,6 +45,8 @@ class CancelBooking
             'cancelled_by' => $by,
             'cancellation_message' => $message,
         ])->save();
+
+        $booking->customer->notify(new BookingCancelled($booking));
 
         return $booking;
     }

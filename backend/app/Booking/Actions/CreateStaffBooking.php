@@ -12,6 +12,7 @@ use App\Models\Barber;
 use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Service;
+use App\Notifications\Booking\BookingConfirmed;
 use Carbon\CarbonImmutable;
 
 class CreateStaffBooking
@@ -54,6 +55,8 @@ class CreateStaffBooking
 
             return $booking;
         });
+
+        $customer->notify(new BookingConfirmed($booking));
 
         return new IssuedBooking($booking, $token);
     }
