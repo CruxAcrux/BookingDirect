@@ -50,6 +50,17 @@
   );
 }
 
+/* Calendar: time nobody can be booked (closed, off duty). */
+@utility closed-hatch {
+  background-image: repeating-linear-gradient(-45deg, transparent 0 7px, var(--color-line) 7px 8px);
+}
+
+/* Calendar: breaks and time off inside working hours. */
+@utility blocked-hatch {
+  background-color: var(--color-paper-deep);
+  background-image: repeating-linear-gradient(-45deg, transparent 0 5px, var(--color-line) 5px 7px);
+}
+
 @utility tabular {
   font-variant-numeric: tabular-nums;
 }
