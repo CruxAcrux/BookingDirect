@@ -62,6 +62,14 @@ Staff sign in at http://localhost:5173/login.
 
 Customers book on the shop's page and confirm their phone number with a one-time SMS code. No SMS provider is connected in development, so the code is shown on screen as a demo code (set `OTP_DEMO_MODE=false` in `backend/.env` to turn this off).
 
+### Text messages and email
+
+Customers get a confirmation when they book, a message when a booking is moved or cancelled, and reminders 24 hours and 2 hours before the visit. Customers with an email address also get it by email, with a calendar file (`.ics`) attached.
+
+- Text messages are logged instead of sent. Owners can read them on the dashboard's **Sent SMS** page.
+- Email goes to Mailpit at http://localhost:8025.
+- Messages are sent by the `queue` container, and reminders are scheduled by the `scheduler` container. To send due reminders right away, run `docker compose exec backend php artisan bookings:send-reminders`.
+
 ## Running tests and checks
 
 ```bash
