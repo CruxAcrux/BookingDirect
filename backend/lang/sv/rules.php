@@ -9,4 +9,5 @@ return [
     'already_has_login' => 'Barberaren har redan en inloggning.',
     'portfolio_full' => 'En portfolio kan ha högst :max bilder.',
     'profile_only' => 'Du kan bara ändra ditt namn, din presentation och din bild.',
+    'iso_datetime' => 'Ange datum och tid med tidszon, till exempel 2026-11-03T08:15:00Z.',
 ];

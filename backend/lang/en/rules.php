@@ -9,4 +9,5 @@ return [
     'already_has_login' => 'This barber already has a login.',
     'portfolio_full' => 'A portfolio can hold at most :max images.',
     'profile_only' => 'You can only change your name, bio and photo.',
+    'iso_datetime' => 'Give a date and time with a timezone, e.g. 2026-11-03T08:15:00Z.',
 ];
