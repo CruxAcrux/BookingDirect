@@ -86,7 +86,13 @@
     "required": "Fyll i fältet.",
     "email": "Ange en giltig e-postadress.",
     "passwordLength": "Lösenordet måste vara minst 10 tecken.",
-    "passwordMismatch": "Lösenorden matchar inte."
+    "passwordMismatch": "Lösenorden matchar inte.",
+    "integer": "Ange ett heltal.",
+    "outOfRange": "Värdet ligger utanför det tillåtna intervallet.",
+    "price": "Ange ett pris i kronor, till exempel 349 eller 349,50.",
+    "stepOfFive": "Ange minuter i steg om 5.",
+    "slug": "Bara små bokstäver a–z, siffror och bindestreck.",
+    "endAfterStart": "Slutet måste vara efter början."
   },
   "errors": {
     "generic": "Något gick fel. Försök igen.",
@@ -109,5 +115,222 @@
       "title": "Dagens schema",
       "body": "Här samlas dagens bokningar och drop-in-kön."
     }
+  },
+  "common": {
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "close": "Stäng",
+    "edit": "Ändra",
+    "delete": "Ta bort",
+    "remove": "Ta bort",
+    "saved": "Sparat.",
+    "loading": "Laddar…",
+    "inactive": "Inaktiv",
+    "minutes": "{n} min",
+    "minShort": "min",
+    "daysShort": "dagar",
+    "hoursShort": "tim",
+    "moveUp": "Flytta upp {name}",
+    "moveDown": "Flytta ned {name}"
+  },
+  "nav": {
+    "label": "Huvudmeny",
+    "overview": "Översikt",
+    "team": "Team",
+    "services": "Tjänster",
+    "settings": "Salongen",
+    "adminShops": "Salonger"
+  },
+  "upload": {
+    "choose": "Välj bild",
+    "replace": "Byt bild",
+    "working": "Laddar upp…",
+    "wrongType": "Välj en JPEG-, PNG- eller WebP-bild.",
+    "tooLarge": "Bilden får vara högst {max} MB.",
+    "help": "JPEG, PNG eller WebP, högst 10 MB. Bilderna sparas i rätt storlek automatiskt."
+  },
+  "schedule": {
+    "closed": "Stängt",
+    "addRange": "Lägg till tid",
+    "from": "Från, {day}",
+    "to": "Till, {day}",
+    "invalidRange": "Sluttiden måste vara efter starttiden.",
+    "overlap": "Tiderna överlappar varandra."
+  },
+  "settings": {
+    "kicker": "Inställningar",
+    "title": "Salongen",
+    "tabsLabel": "Inställningar",
+    "tabs": {
+      "profile": "Profil",
+      "booking": "Bokningsregler",
+      "hours": "Öppettider",
+      "images": "Bilder"
+    },
+    "fields": {
+      "name": "Salongens namn",
+      "slug": "Adress till bokningssidan",
+      "address": "Gatuadress",
+      "phone": "Telefon",
+      "email": "E-post",
+      "locale": "Språk för kunder",
+      "timezone": "Tidszon",
+      "slotInterval": "Starttider var",
+      "minNotice": "Framförhållning",
+      "maxDaysAhead": "Boka max",
+      "cancellationWindow": "Avboka senast",
+      "walkIns": "Drop-in-kö"
+    },
+    "slugHint": "Kunderna bokar på /s/{slug}. Gamla länkar slutar fungera om du ändrar den.",
+    "bookingRulesHelp": "Framförhållning är hur tidigt kunden senast kan boka. Avbokning anges i timmar före besöket.",
+    "walkInsHelp": "Visa en live-kö för gäster utan bokning.",
+    "hoursHelp": "Ange när salongen har öppet. En dag kan ha flera pass, till exempel stängt för lunch. Dagar utan tider är stängda.",
+    "logo": "Logotyp",
+    "cover": "Omslagsbild"
+  },
+  "services": {
+    "kicker": "Meny",
+    "title": "Tjänster",
+    "add": "Ny tjänst",
+    "addTitle": "Ny tjänst",
+    "editTitle": "Ändra tjänst",
+    "emptyTitle": "Inga tjänster än",
+    "emptyBody": "Lägg till det salongen erbjuder, med tid och pris.",
+    "fields": {
+      "name": "Namn",
+      "description": "Beskrivning",
+      "duration": "Längd",
+      "buffer": "Paus efter",
+      "price": "Pris",
+      "rebookAfter": "Påminn om ny tid efter",
+      "active": "Bokningsbar"
+    },
+    "rebookHint": "Lämna tomt för att inte skicka påminnelser.",
+    "activeHint": "Inaktiva tjänster syns inte för kunder.",
+    "bufferShort": "{n} min paus",
+    "rebookShort": "påminnelse efter {n} dagar",
+    "deleteTitle": "Ta bort {name}?",
+    "deleteBody": "Tjänsten försvinner från menyn. Tidigare bokningar påverkas inte.",
+    "deleted": "Tjänsten är borttagen."
+  },
+  "team": {
+    "kicker": "Teamet",
+    "title": "Barberare",
+    "add": "Lägg till barberare",
+    "addTitle": "Ny barberare",
+    "addHint": "Du kan bjuda in barberaren att logga in efteråt.",
+    "created": "{name} är tillagd.",
+    "emptyTitle": "Inga barberare än",
+    "emptyBody": "Lägg till de som klipper i salongen.",
+    "noLogin": "Ingen inloggning",
+    "you": "Du",
+    "back": "Alla barberare",
+    "notFound": "Barberaren hittades inte.",
+    "tabsLabel": "Barberare",
+    "tabs": {
+      "profile": "Profil",
+      "services": "Tjänster",
+      "schedule": "Schema",
+      "timeOff": "Ledighet",
+      "portfolio": "Portfolio"
+    },
+    "fields": {
+      "displayName": "Namn som kunderna ser",
+      "bio": "Presentation",
+      "active": "Aktiv"
+    },
+    "activeHint": "Inaktiva barberare kan inte bokas.",
+    "photo": "Bild",
+    "login": "Inloggning",
+    "noLoginHint": "Barberaren har ingen inloggning. Bjud in för att låta hen se sitt schema och sköta sin profil.",
+    "inviteEmail": "E-post för inbjudan",
+    "invite": "Skicka inbjudan",
+    "invited": "Inbjudan är skickad till {email}.",
+    "remove": "Ta bort",
+    "removeButton": "Ta bort barberare",
+    "deleteTitle": "Ta bort {name}?",
+    "deleteBody": "Barberaren kan inte längre bokas eller logga in. Tidigare bokningar finns kvar.",
+    "deleted": "{name} är borttagen.",
+    "services": {
+      "help": "Bocka i tjänsterna barberaren utför. Lämna pris och längd tomma för att använda tjänstens standard.",
+      "readonlyHelp": "Tjänsterna barberaren utför. Ägaren ändrar dem.",
+      "service": "Tjänst",
+      "default": "Standard",
+      "price": "Eget pris (kr)",
+      "duration": "Egen längd (min)",
+      "priceFor": "Eget pris för {name}",
+      "durationFor": "Egen längd för {name}",
+      "invalid": "Kontrollera priser och längder. Längd anges i steg om 5 minuter."
+    },
+    "schedule": {
+      "workingHours": "Arbetstider",
+      "breaks": "Raster",
+      "workingHoursHelp": "När barberaren jobbar en vanlig vecka. Bara tid inom öppettiderna kan bokas.",
+      "breaksHelp": "Återkommande raster, till exempel lunch. De blockeras i bokningen.",
+      "outsideOpening": "Delvis utanför salongens öppettider. Den delen kan inte bokas.",
+      "breakOutsideHours": "Rasten ligger utanför arbetstiden."
+    },
+    "timeOff": {
+      "upcoming": "Ledighet",
+      "empty": "Ingen ledighet inlagd.",
+      "add": "Lägg till ledighet",
+      "added": "Ledigheten är tillagd.",
+      "allDay": "Hela dagar",
+      "from": "Från",
+      "to": "Till och med",
+      "startTime": "Starttid",
+      "endTime": "Sluttid",
+      "reason": "Orsak",
+      "note": "Anteckning",
+      "deleteTitle": "Ta bort ledigheten?",
+      "reasons": {
+        "vacation": "Semester",
+        "sick": "Sjuk",
+        "other": "Annat"
+      }
+    },
+    "portfolio": {
+      "add": "Lägg till bilder",
+      "help": "Upp till 30 bilder. JPEG, PNG eller WebP, högst 10 MB styck.",
+      "empty": "Inga bilder än.",
+      "imageAlt": "Portfoliobild {n}",
+      "caption": "Bildtext för bild {n}",
+      "captionPlaceholder": "Bildtext",
+      "deleteTitle": "Ta bort bilden?"
+    }
+  },
+  "admin": {
+    "kicker": "Plattform",
+    "title": "Salonger",
+    "add": "Ny salong",
+    "addTitle": "Ny salong",
+    "search": "Sök salong",
+    "empty": "Inga salonger hittades.",
+    "columns": {
+      "shop": "Salong",
+      "owners": "Ägare",
+      "created": "Skapad",
+      "status": "Status",
+      "actions": "Åtgärder"
+    },
+    "active": "Aktiv",
+    "inactive": "Avstängd",
+    "activate": "Aktivera",
+    "deactivate": "Stäng av",
+    "deactivateTitle": "Stäng av {name}?",
+    "deactivateBody": "Bokningssidan och personalens inloggning slutar fungera. Inget raderas.",
+    "created": "{name} är skapad.",
+    "fields": {
+      "name": "Salongens namn",
+      "slug": "Adress (valfri)",
+      "ownerName": "Ägarens namn",
+      "ownerEmail": "Ägarens e-post"
+    },
+    "slugHint": "Lämna tomt för att skapa en från namnet.",
+    "inviteHint": "En ny ägare får ett mejl för att välja lösenord.",
+    "pagination": "Sidor",
+    "previous": "Föregående",
+    "next": "Nästa",
+    "page": "Sida {page} av {total}"
   }
 }

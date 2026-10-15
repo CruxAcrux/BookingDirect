@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Enums\ShopRole;
+use App\Models\Barber;
 use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -19,6 +20,19 @@ abstract class TestCase extends BaseTestCase
         $statefulDomains = config('sanctum.stateful');
 
         return $this->withHeader('Origin', 'http://'.Arr::first($statefulDomains));
+    }
+
+    /**
+     * A barber with a login in the given shop.
+     *
+     * @return array{0: User, 1: Barber}
+     */
+    protected function barberWithLogin(Shop $shop): array
+    {
+        $user = $this->staffMember($shop, ShopRole::Barber);
+        $barber = Barber::factory()->for($shop)->create(['user_id' => $user->id]);
+
+        return [$user, $barber];
     }
 
     protected function staffMember(?Shop $shop = null, ShopRole $role = ShopRole::Owner): User

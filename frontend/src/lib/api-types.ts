@@ -4,6 +4,167 @@
  */
 
 export interface paths {
+  '/barbers/order': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Set the display order of all barbers */
+    put: operations['barber.reorder']
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List the shop's barbers, including inactive ones */
+    get: operations['barbers.index']
+    put?: never
+    /**
+     * Add a barber profile. It is placed last in the list
+     * @description The barber gets no login until they are invited.
+     */
+    post: operations['barbers.store']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** A barber with their login and services */
+    get: operations['barbers.show']
+    /**
+     * Update a barber
+     * @description Barbers may update their own name and bio; everything else is for owners.
+     */
+    put: operations['barbers.update']
+    post?: never
+    /**
+     * Remove a barber
+     * @description The profile is archived so past bookings keep it, and the barber loses access to the shop.
+     */
+    delete: operations['barbers.destroy']
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/invite': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Give a barber a login
+     * @description A new user gets an email to choose a password. An existing user, such as an owner
+     *     who also cuts hair, is linked without changing their password.
+     */
+    post: operations['barber.invite']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/services': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Set which services a barber offers, with optional price and duration overrides */
+    put: operations['barber.syncServices']
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/avatar': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Upload a barber's photo
+     * @description JPEG, PNG or WebP up to 10 MB, cropped to a 400 × 400 square and stored as WebP.
+     */
+    post: operations['barberAvatar.store']
+    /** Remove a barber's photo */
+    delete: operations['barberAvatar.destroy']
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/working-hours': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** A barber's weekly working hours */
+    get: operations['barberSchedule.workingHours']
+    /**
+     * Replace a barber's weekly working hours
+     * @description Hours outside the shop's opening hours are allowed; only the overlap can be booked.
+     */
+    put: operations['barberSchedule.updateWorkingHours']
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/breaks': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** A barber's weekly breaks */
+    get: operations['barberSchedule.breaks']
+    /** Replace a barber's weekly breaks */
+    put: operations['barberSchedule.updateBreaks']
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/auth/forgot-password': {
     parameters: {
       query?: never
@@ -79,6 +240,83 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/shop/opening-hours': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** The shop's weekly opening hours */
+    get: operations['openingHours.index']
+    /**
+     * Replace the weekly opening hours
+     * @description Send the whole week; days without ranges are closed. A day may have several ranges.
+     */
+    put: operations['openingHours.update']
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/portfolio/order': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Set the display order of a barber's portfolio */
+    put: operations['portfolio.reorder']
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/portfolio': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** A barber's portfolio, in display order */
+    get: operations['portfolio.index']
+    put?: never
+    /**
+     * Add an image to a barber's portfolio
+     * @description JPEG, PNG or WebP up to 10 MB. Stored as WebP up to 1600 px, with a 600 px square thumbnail.
+     */
+    post: operations['portfolio.store']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/portfolio/{portfolioImage}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Change an image's caption */
+    put: operations['portfolio.update']
+    post?: never
+    /** Remove an image from a barber's portfolio */
+    delete: operations['portfolio.destroy']
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/auth/reset-password': {
     parameters: {
       query?: never
@@ -91,6 +329,62 @@ export interface paths {
     /** Choose a new password using the token from the reset email */
     post: operations['auth.resetPassword']
     delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/services/order': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Set the display order of all services */
+    put: operations['service.reorder']
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/services': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** List the shop's services, including inactive ones */
+    get: operations['services.index']
+    put?: never
+    /** Add a service. It is placed last in the list */
+    post: operations['services.store']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/services/{service}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Update a service */
+    put: operations['services.update']
+    post?: never
+    /**
+     * Delete a service
+     * @description The service is archived, so past bookings and statistics keep their reference.
+     */
+    delete: operations['services.destroy']
     options?: never
     head?: never
     patch?: never
@@ -154,6 +448,87 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/shop': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** The current shop's profile and booking rules */
+    get: operations['shop.show']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Update the shop's profile and booking rules
+     * @description Phone numbers are stored in E.164; Swedish numbers without a country code are accepted.
+     */
+    patch: operations['shop.update']
+    trace?: never
+  }
+  '/shop/{type}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Upload the shop's logo or cover image
+     * @description JPEG, PNG or WebP up to 10 MB. Stored as WebP: logos up to 512 px, covers up to 2000 px wide.
+     */
+    post: operations['shopImage.store']
+    /** Remove the shop's logo or cover image */
+    delete: operations['shopImage.destroy']
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/time-off': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** A barber's time off, from 30 days ago onwards */
+    get: operations['time-off.index']
+    put?: never
+    /**
+     * Add time off
+     * @description Takes effect immediately. Barbers can add their own; owners can add for anyone.
+     */
+    post: operations['time-off.store']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/barbers/{barber}/time-off/{timeOff}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Update time off */
+    put: operations['time-off.update']
+    post?: never
+    /** Remove time off */
+    delete: operations['time-off.destroy']
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -176,6 +551,34 @@ export interface components {
         email: string
       }[]
     }
+    /** BarberRequest */
+    BarberRequest: {
+      display_name: string
+      bio?: string | null
+      is_active?: boolean
+    }
+    /** BarberResource */
+    BarberResource: {
+      id: number
+      display_name: string
+      bio: string | null
+      avatar_url: string | null
+      is_active: boolean
+      sort_order: number
+      /** @description Whether this profile belongs to the signed-in user. */
+      is_me: boolean
+      user?: {
+        id: number
+        name: string
+        email: string
+      } | null
+      /** @description Services this barber offers. Null price or duration means the service default. */
+      services?: {
+        service_id: number
+        price_ore: number | null
+        duration_minutes: number | null
+      }[]
+    }
     /** CurrentUserResource */
     CurrentUserResource: {
       id: number
@@ -191,12 +594,39 @@ export interface components {
       /** Format: email */
       email: string
     }
+    /** ImageUploadRequest */
+    ImageUploadRequest: {
+      /**
+       * Format: binary
+       * @description Maximum file size: 10240 kilobytes.
+       */
+      image: string
+      caption?: string | null
+    }
+    /** InviteBarberRequest */
+    InviteBarberRequest: {
+      /** Format: email */
+      email: string
+      name?: string | null
+    }
     /** LoginRequest */
     LoginRequest: {
       /** Format: email */
       email: string
       password: string
       remember?: boolean
+    }
+    /** PortfolioImageResource */
+    PortfolioImageResource: {
+      id: number
+      url: string
+      thumbnail_url: string
+      caption: string | null
+      sort_order: number
+    }
+    /** ReorderRequest */
+    ReorderRequest: {
+      ids: number[]
     }
     /** ResetPasswordRequest */
     ResetPasswordRequest: {
@@ -206,6 +636,32 @@ export interface components {
       password: string
       password_confirmation: string
     }
+    /**
+     * ServiceRequest
+     * @description Prices are in öre (1 kr = 100 öre). Durations are in whole minutes, in steps of 5.
+     */
+    ServiceRequest: {
+      name: string
+      description?: string | null
+      duration_minutes: number
+      buffer_minutes?: number
+      price_ore: number
+      rebook_after_days?: number | null
+      is_active?: boolean
+    }
+    /** ServiceResource */
+    ServiceResource: {
+      id: number
+      name: string
+      description: string | null
+      duration_minutes: number
+      buffer_minutes: number
+      /** @description Price in öre. */
+      price_ore: number
+      rebook_after_days: number | null
+      is_active: boolean
+      sort_order: number
+    }
     /** ShopMembershipResource */
     ShopMembershipResource: {
       id: number
@@ -213,6 +669,24 @@ export interface components {
       slug: string
       role: components['schemas']['ShopRole']
       is_active: boolean
+    }
+    /** ShopResource */
+    ShopResource: {
+      id: number
+      name: string
+      slug: string
+      address: string | null
+      phone: string | null
+      email: string | null
+      timezone: string
+      locale: string
+      logo_url: string | null
+      cover_url: string | null
+      min_notice_minutes: number
+      max_days_ahead: number
+      cancellation_window_hours: number
+      slot_interval_minutes: number
+      walk_ins_enabled: boolean
     }
     /**
      * ShopRole
@@ -231,6 +705,82 @@ export interface components {
         /** Format: email */
         email: string
       }
+    }
+    /**
+     * SyncBarberServicesRequest
+     * @description The services a barber offers. A null price or duration means the service's default applies.
+     */
+    SyncBarberServicesRequest: {
+      services: {
+        id: number
+        price_ore?: number | null
+        duration_minutes?: number | null
+      }[]
+    }
+    /**
+     * TimeOffReason
+     * @enum {string}
+     */
+    TimeOffReason: 'vacation' | 'sick' | 'other'
+    /**
+     * TimeOffRequest
+     * @description Times are local wall-clock times in the shop's timezone, e.g. "2026-11-03T09:00".
+     *     A full day off runs from 00:00 to 00:00 the next day.
+     */
+    TimeOffRequest: {
+      starts_at: string
+      ends_at: string
+      reason: components['schemas']['TimeOffReason']
+      note?: string | null
+    }
+    /** TimeOffResource */
+    TimeOffResource: {
+      id: number
+      barber_id: number
+      starts_at: string
+      ends_at: string
+      /** @description Local time in the shop's timezone, e.g. "2026-11-03T09:00". */
+      starts_at_local: string
+      ends_at_local: string
+      all_day: boolean
+      reason: components['schemas']['TimeOffReason']
+      note: string | null
+    }
+    /** UpdateShopRequest */
+    UpdateShopRequest: {
+      name?: string
+      slug?: string
+      address?: string | null
+      phone?: string | null
+      /** Format: email */
+      email?: string | null
+      timezone?: string
+      /** @enum {string} */
+      locale?: 'sv' | 'en'
+      min_notice_minutes?: number
+      max_days_ahead?: number
+      cancellation_window_hours?: number
+      /** @enum {integer} */
+      slot_interval_minutes?: 5 | 10 | 15 | 20 | 30 | 60
+      walk_ins_enabled?: boolean
+    }
+    /** WeeklyHourResource */
+    WeeklyHourResource: {
+      weekday: number
+      starts_at: string
+      ends_at: string
+    }
+    /**
+     * WeeklyHoursRequest
+     * @description A full week of time ranges: opening hours, working hours or breaks. Several ranges per day are allowed
+     *     (closed for lunch), but they may not overlap. Days without ranges are closed.
+     */
+    WeeklyHoursRequest: {
+      hours: {
+        weekday: number
+        starts_at: string
+        ends_at: string
+      }[]
     }
   }
   responses: {
@@ -294,6 +844,422 @@ export interface components {
 }
 export type $defs = Record<string, never>
 export interface operations {
+  'barber.reorder': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ReorderRequest']
+      }
+    }
+    responses: {
+      /** @description Array of `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'barbers.index': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+    }
+  }
+  'barbers.store': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BarberRequest']
+      }
+    }
+    responses: {
+      /** @description `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'] & Record<string, never>
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'barbers.show': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'] & Record<string, never>
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'barbers.update': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BarberRequest']
+      }
+    }
+    responses: {
+      /** @description `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'] & Record<string, never>
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'barbers.destroy': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description No content */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'barber.invite': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['InviteBarberRequest']
+      }
+    }
+    responses: {
+      /** @description `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'] & Record<string, never>
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'barber.syncServices': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SyncBarberServicesRequest']
+      }
+    }
+    responses: {
+      /** @description `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'] & Record<string, never>
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'barberAvatar.store': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'multipart/form-data': components['schemas']['ImageUploadRequest']
+      }
+    }
+    responses: {
+      /** @description `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'] & Record<string, never>
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'barberAvatar.destroy': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `BarberResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['BarberResource'] & Record<string, never>
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'barberSchedule.workingHours': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `WeeklyHourResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['WeeklyHourResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'barberSchedule.updateWorkingHours': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['WeeklyHoursRequest']
+      }
+    }
+    responses: {
+      /** @description Array of `WeeklyHourResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['WeeklyHourResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'barberSchedule.breaks': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `WeeklyHourResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['WeeklyHourResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'barberSchedule.updateBreaks': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['WeeklyHoursRequest']
+      }
+    }
+    responses: {
+      /** @description Array of `WeeklyHourResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['WeeklyHourResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
   'auth.forgotPassword': {
     parameters: {
       query?: never
@@ -402,6 +1368,216 @@ export interface operations {
       401: components['responses']['AuthenticationException']
     }
   }
+  'openingHours.index': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `WeeklyHourResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['WeeklyHourResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+    }
+  }
+  'openingHours.update': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['WeeklyHoursRequest']
+      }
+    }
+    responses: {
+      /** @description Array of `WeeklyHourResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['WeeklyHourResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'portfolio.reorder': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ReorderRequest']
+      }
+    }
+    responses: {
+      /** @description Array of `PortfolioImageResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PortfolioImageResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'portfolio.index': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `PortfolioImageResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PortfolioImageResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'portfolio.store': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'multipart/form-data': components['schemas']['ImageUploadRequest']
+      }
+    }
+    responses: {
+      /** @description `PortfolioImageResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PortfolioImageResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'portfolio.update': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+        /** @description The portfolio image ID */
+        portfolioImage: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': {
+          caption: string | null
+        }
+      }
+    }
+    responses: {
+      /** @description `PortfolioImageResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['PortfolioImageResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'portfolio.destroy': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+        /** @description The portfolio image ID */
+        portfolioImage: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description No content */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
   'auth.resetPassword': {
     parameters: {
       query?: never
@@ -428,9 +1604,151 @@ export interface operations {
       422: components['responses']['ValidationException']
     }
   }
-  'shop.index': {
+  'service.reorder': {
     parameters: {
       query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ReorderRequest']
+      }
+    }
+    responses: {
+      /** @description Array of `ServiceResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['ServiceResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'services.index': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `ServiceResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['ServiceResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+    }
+  }
+  'services.store': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ServiceRequest']
+      }
+    }
+    responses: {
+      /** @description `ServiceResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['ServiceResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'services.update': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The service ID */
+        service: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ServiceRequest']
+      }
+    }
+    responses: {
+      /** @description `ServiceResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['ServiceResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'services.destroy': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The service ID */
+        service: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description No content */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'shop.index': {
+    parameters: {
+      query?: {
+        search?: string | null
+        page?: number
+      }
       header?: never
       path?: never
       cookie?: never
@@ -475,6 +1793,7 @@ export interface operations {
       }
       401: components['responses']['AuthenticationException']
       403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
     }
   }
   'shop.store': {
@@ -556,6 +1875,238 @@ export interface operations {
             data: components['schemas']['AdminShopResource'] & Record<string, never>
           }
         }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'shop.show': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `ShopResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['ShopResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+    }
+  }
+  'shop.update': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['UpdateShopRequest']
+      }
+    }
+    responses: {
+      /** @description `ShopResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['ShopResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'shopImage.store': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        type: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'multipart/form-data': components['schemas']['ImageUploadRequest']
+      }
+    }
+    responses: {
+      /** @description `ShopResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['ShopResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'shopImage.destroy': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        type: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description `ShopResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['ShopResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+    }
+  }
+  'time-off.index': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Array of `TimeOffResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['TimeOffResource'][]
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+    }
+  }
+  'time-off.store': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['TimeOffRequest']
+      }
+    }
+    responses: {
+      /** @description `TimeOffResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['TimeOffResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'time-off.update': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+        /** @description The time off ID */
+        timeOff: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['TimeOffRequest']
+      }
+    }
+    responses: {
+      /** @description `TimeOffResource` */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': {
+            data: components['schemas']['TimeOffResource']
+          }
+        }
+      }
+      401: components['responses']['AuthenticationException']
+      403: components['responses']['AuthorizationException']
+      404: components['responses']['ModelNotFoundException']
+      422: components['responses']['ValidationException']
+    }
+  }
+  'time-off.destroy': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The barber ID */
+        barber: number
+        /** @description The time off ID */
+        timeOff: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description No content */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       401: components['responses']['AuthenticationException']
       403: components['responses']['AuthorizationException']

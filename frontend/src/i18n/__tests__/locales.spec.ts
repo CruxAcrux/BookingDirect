@@ -1,7 +1,10 @@
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-import en from '@/locales/en.json'
-import sv from '@/locales/sv.json'
+// Read the raw files: imports go through the i18n plugin, which compiles messages.
+const load = (locale: string): unknown =>
+  JSON.parse(readFileSync(resolve(import.meta.dirname, `../../locales/${locale}.json`), 'utf8'))
 
 function keyPaths(value: unknown, prefix = ''): string[] {
   if (typeof value !== 'object' || value === null) return [prefix]
@@ -12,6 +15,6 @@ function keyPaths(value: unknown, prefix = ''): string[] {
 
 describe('locale files', () => {
   it('define the same keys in Swedish and English', () => {
-    expect(keyPaths(en).sort()).toEqual(keyPaths(sv).sort())
+    expect(keyPaths(load('en')).sort()).toEqual(keyPaths(load('sv')).sort())
   })
 })

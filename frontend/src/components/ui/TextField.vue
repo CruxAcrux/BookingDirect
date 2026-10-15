@@ -6,11 +6,13 @@ const {
   type = 'text',
   error,
   hint,
+  suffix,
 } = defineProps<{
   label: string
-  type?: 'text' | 'email' | 'password' | 'tel'
+  type?: 'text' | 'email' | 'password' | 'tel' | 'number' | 'time' | 'date' | 'datetime-local'
   error?: string | undefined
   hint?: string
+  suffix?: string
 }>()
 
 const model = defineModel<string>({ default: '' })
@@ -28,15 +30,25 @@ const describedBy = computed(
 <template>
   <div>
     <label :for="id" class="block font-mono text-xs tracking-widest uppercase">{{ label }}</label>
-    <input
-      :id="id"
-      v-model="model"
-      :type="type"
-      :aria-invalid="error ? true : undefined"
-      :aria-describedby="describedBy"
-      v-bind="$attrs"
-      class="mt-2 block w-full border-2 border-ink bg-paper px-3 py-2.5 text-base text-ink placeholder:text-ink-soft/60 focus:bg-white focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pole aria-invalid:border-pole"
-    />
+    <div class="relative mt-2">
+      <input
+        :id="id"
+        v-model="model"
+        :type="type"
+        :aria-invalid="error ? true : undefined"
+        :aria-describedby="describedBy"
+        v-bind="$attrs"
+        class="block w-full border-2 border-ink bg-paper px-3 py-2.5 text-base text-ink placeholder:text-ink-soft/60 focus:bg-white focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pole aria-invalid:border-pole"
+        :class="{ 'pr-12': suffix }"
+      />
+      <span
+        v-if="suffix"
+        class="pointer-events-none absolute inset-y-0 right-3 flex items-center font-mono text-sm text-ink-soft"
+        aria-hidden="true"
+      >
+        {{ suffix }}
+      </span>
+    </div>
     <p v-if="hint && !error" :id="`${id}-hint`" class="mt-1.5 text-sm text-ink-soft">
       {{ hint }}
     </p>

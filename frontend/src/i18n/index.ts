@@ -24,7 +24,12 @@ function initialLocale(): AppLocale {
 }
 
 const numberFormats = {
-  currency: { style: 'currency', currency: 'SEK', maximumFractionDigits: 0 },
+  currency: {
+    style: 'currency',
+    currency: 'SEK',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  },
 } as const
 
 const datetimeFormats = {

@@ -11,4 +11,8 @@ if [ -f artisan ] && [ ! -f .env ]; then
     php artisan key:generate --ansi
 fi
 
+if [ -f artisan ] && [ ! -e public/storage ]; then
+    php artisan storage:link --quiet
+fi
+
 exec "$@"

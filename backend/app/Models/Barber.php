@@ -96,7 +96,7 @@ class Barber extends Model
     /**
      * @return HasMany<TimeOff, $this>
      */
-    public function timeOff(): HasMany
+    public function timeOffs(): HasMany
     {
         return $this->hasMany(TimeOff::class);
     }
