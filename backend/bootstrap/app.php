@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\ResolveManagedBooking;
+use App\Http\Middleware\ResolvePublicShop;
 use App\Http\Middleware\ResolveStaffShop;
 use App\Http\Middleware\SetLocaleFromRequest;
 use Illuminate\Foundation\Application;
@@ -20,6 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->api(append: [SetLocaleFromRequest::class]);
         $middleware->alias([
             'shop' => ResolveStaffShop::class,
+            'public.shop' => ResolvePublicShop::class,
+            'manage.booking' => ResolveManagedBooking::class,
         ]);
         // The current shop must be known before route model binding runs, so bound
         // models are already scoped to it and other shops' records resolve to 404.
