@@ -2,6 +2,8 @@
 
 namespace App\Sms;
 
+use App\Enums\SmsType;
+use App\Models\Shop;
 use App\Models\SmsMessage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
@@ -12,12 +14,13 @@ use Illuminate\Support\Facades\Log;
  */
 class LogSmsSender implements SmsSender
 {
-    public function send(string $to, string $body, string $type, ?Model $related = null): void
+    public function send(Shop $shop, string $to, string $body, SmsType $type, ?Model $related = null): void
     {
         $message = new SmsMessage(['to' => $to, 'body' => $body, 'type' => $type, 'sent_at' => now()]);
+        $message->shop_id = $shop->id;
         $message->related()->associate($related);
         $message->save();
 
-        Log::info('SMS sent', ['to' => $to, 'type' => $type, 'body' => $body]);
+        Log::info('SMS sent', ['shop' => $shop->id, 'to' => $to, 'type' => $type->value, 'body' => $body]);
     }
 }

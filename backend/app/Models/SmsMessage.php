@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SmsType;
 use App\Models\Concerns\BelongsToShop;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,9 @@ use Illuminate\Support\Carbon;
  * @property int $shop_id
  * @property string $to
  * @property string $body
- * @property string $type
+ * @property SmsType $type
+ * @property string|null $related_type
+ * @property int|null $related_id
  * @property Carbon $sent_at
  */
 #[Fillable(['to', 'body', 'type', 'sent_at'])]
@@ -25,6 +28,7 @@ class SmsMessage extends Model
     {
         return [
             'sent_at' => 'datetime',
+            'type' => SmsType::class,
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Customers;
 
+use App\Enums\SmsType;
 use App\Models\CustomerOtp;
 use App\Models\Shop;
 use App\Sms\SmsSender;
@@ -39,7 +40,7 @@ class OtpService
             ]);
         });
 
-        $this->sms->send($phone, __('booking.sms.otp', ['code' => $code, 'shop' => $shop->name, 'minutes' => self::TTL_MINUTES]), 'otp');
+        $this->sms->send($shop, $phone, __('booking.sms.otp', ['code' => $code, 'shop' => $shop->name, 'minutes' => self::TTL_MINUTES]), SmsType::Otp);
 
         return $code;
     }
