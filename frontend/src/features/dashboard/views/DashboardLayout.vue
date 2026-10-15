@@ -30,6 +30,7 @@ const navigation = computed(() => {
   if (shop) {
     items.push(
       { name: 'dashboard', label: t('nav.overview'), matches: ['dashboard'] },
+      { name: 'calendar', label: t('nav.calendar'), matches: ['calendar'] },
       { name: 'team', label: t('nav.team'), matches: ['team', 'barber', 'barber-'] },
       { name: 'services', label: t('nav.services'), matches: ['services'] },
     )

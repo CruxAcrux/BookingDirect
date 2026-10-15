@@ -112,8 +112,14 @@
     "noShop": "You're not connected to an active shop. Contact the shop owner.",
     "adminNoShop": "You're a platform admin and not connected to any shop.",
     "today": {
-      "title": "Today's schedule",
-      "body": "Today's bookings and the walk-in queue will show up here."
+      "title": "Today",
+      "count": "{left} left of {total}",
+      "empty": "No more bookings today."
+    },
+    "openCalendar": "Open the calendar",
+    "toMark": {
+      "title": "To mark",
+      "empty": "Every visit is marked."
     }
   },
   "common": {
@@ -140,7 +146,8 @@
     "team": "Team",
     "services": "Services",
     "settings": "Shop",
-    "adminShops": "Shops"
+    "adminShops": "Shops",
+    "calendar": "Calendar"
   },
   "upload": {
     "choose": "Choose image",
@@ -448,5 +455,57 @@
     "noneUpcoming": "No upcoming bookings.",
     "history": "Earlier",
     "bookAgain": "Book again"
+  },
+  "calendar": {
+    "kicker": "Calendar",
+    "newBooking": "New booking",
+    "navigation": "Browse",
+    "previous": "Previous",
+    "next": "Next",
+    "today": "Today",
+    "pickDate": "Pick a date",
+    "view": "View",
+    "views": {
+      "day": "Day",
+      "week": "Week"
+    },
+    "showCancelled": "Show cancelled",
+    "noBarbers": "No barbers to show.",
+    "openBooking": "Booking {time}, {name}",
+    "needsOutcome": "Mark outcome",
+    "created": "The booking was created.",
+    "moved": "The booking was moved.",
+    "cancelled": "The booking was cancelled.",
+    "marked": "The outcome was saved.",
+    "fields": {
+      "service": "Service",
+      "barber": "Barber",
+      "date": "Date",
+      "time": "Time",
+      "customer": "Customer",
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "staffNote": "Internal note"
+    },
+    "searchCustomer": "Find an existing customer",
+    "searchHint": "Name or phone number.",
+    "staffRules": "Staff can book outside opening hours, but never two customers at once with the same barber.",
+    "book": "Book",
+    "price": "Price",
+    "customerNote": "Customer's message",
+    "cancellationMessage": "Cancellation message",
+    "source": {
+      "online": "Booked online",
+      "staff": "Booked by staff",
+      "walk_in": "Walk-in"
+    },
+    "markCompleted": "Completed",
+    "markNoShow": "No-show",
+    "move": "Move",
+    "confirmMove": "Move booking",
+    "cancel": "Cancel",
+    "cancelMessage": "Message for the customer (optional)",
+    "confirmCancel": "Cancel booking"
   }
 }
