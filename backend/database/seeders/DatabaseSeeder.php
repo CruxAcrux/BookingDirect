@@ -2,14 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Enums\BookingStatus;
 use App\Enums\ShopRole;
 use App\Enums\Weekday;
 use App\Models\Barber;
+use App\Models\Booking;
+use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Shop;
 use App\Models\User;
 use App\Tenancy\CurrentShop;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use RuntimeException;
 
 class DatabaseSeeder extends Seeder
@@ -74,6 +79,11 @@ class DatabaseSeeder extends Seeder
 
             foreach ($barbers as $barber) {
                 $barber->services()->sync($services->pluck('id'));
+            }
+
+            $this->seedBookings($shop, $barbers->values()->all(), $services->values()->all());
+
+            foreach ($barbers as $barber) {
 
                 foreach ([Weekday::Tuesday, Weekday::Wednesday, Weekday::Thursday, Weekday::Friday, Weekday::Saturday] as $day) {
                     $barber->workingHours()->create(['weekday' => $day, 'starts_at' => '10:00', 'ends_at' => $day === Weekday::Saturday ? '16:00' : '19:00']);
@@ -81,5 +91,40 @@ class DatabaseSeeder extends Seeder
                 }
             }
         });
+    }
+
+    /**
+     * A handful of bookings around today, so the calendar has something to show.
+     *
+     * @param  array<int, Barber>  $barbers
+     * @param  array<int, Service>  $services
+     */
+    private function seedBookings(Shop $shop, array $barbers, array $services): void
+    {
+        $customers = Customer::factory()->for($shop)->count(6)->create()->values()->all();
+        $plan = [
+            // [day offset, local time, barber, service, status]
+            [-1, '10:00', 0, 1, BookingStatus::Completed],
+            [-1, '14:00', 1, 0, BookingStatus::Confirmed],
+            [0, '10:00', 0, 0, BookingStatus::Confirmed],
+            [0, '11:00', 1, 2, BookingStatus::Confirmed],
+            [0, '15:30', 0, 3, BookingStatus::Confirmed],
+            [1, '10:30', 1, 1, BookingStatus::Confirmed],
+            [1, '13:30', 0, 0, BookingStatus::Cancelled],
+            [2, '16:00', 0, 2, BookingStatus::Confirmed],
+        ];
+
+        foreach ($plan as $index => [$offset, $time, $barberIndex, $serviceIndex, $status]) {
+            $service = $services[$serviceIndex];
+            $startsAt = CarbonImmutable::now($shop->timezone)->startOfDay()->addDays($offset)->setTimeFromTimeString($time)->utc();
+
+            Booking::factory()
+                ->for($barbers[$barberIndex])
+                ->for($customers[$index % count($customers)] ?? Customer::factory()->for($shop))
+                ->for($service)
+                ->at(Carbon::instance($startsAt), $service->duration_minutes, $service->buffer_minutes)
+                ->status($status)
+                ->create(['price_ore' => $service->price_ore]);
+        }
     }
 }
