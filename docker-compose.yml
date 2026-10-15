@@ -36,6 +36,22 @@ services:
     depends_on:
       - backend
 
+  # Runs scheduled jobs such as booking reminders.
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    command: php artisan schedule:work
+    volumes:
+      - ./backend:/var/www/html
+    environment:
+      FRONTEND_URL: http://localhost:${FRONTEND_PORT:-5173}
+    depends_on:
+      - backend
+
   nginx:
     image: nginx:1.30-alpine
     ports:
