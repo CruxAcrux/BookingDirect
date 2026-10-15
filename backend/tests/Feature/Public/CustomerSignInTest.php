@@ -99,3 +99,11 @@ it('validates the phone number', function () {
     $this->postJson("/api/v1/public/shops/{$this->shop->slug}/otp", ['phone' => '12'])
         ->assertJsonValidationErrors('phone');
 });
+
+it('returns the code only in demo mode', function (bool $demo) {
+    config(['booking.otp_demo_mode' => $demo]);
+
+    $response = $this->postJson("/api/v1/public/shops/{$this->shop->slug}/otp", ['phone' => '0701234567'])->assertAccepted();
+
+    expect($response->json('demo_code'))->toBe($demo ? sentCode() : null);
+})->with([true, false]);
